@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'restoran-kafilerija';
+  glupostiNaAjbubenu = "Պրվոկլասնա կերեթինա ի մաճետինա";
+  glupostiNaMhedruliju = "პონეკი ფუთ ბუდე ი პტიცა იზ ოლუკა";
+}

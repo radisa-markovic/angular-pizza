@@ -1,0 +1,19 @@
+{
+  "sastojci": [
+    {
+      "id": 1,
+      "naziv": "Pečurke",
+      "cena": 40
+    },
+    {
+      "id": 2,
+      "naziv": "Kisela pavlaka",
+      "cena": 30
+    },
+    {
+      "id": 3,
+      "naziv": "Ljuta papričica",
+      "cena": 35
+    }
+  ]
+}
