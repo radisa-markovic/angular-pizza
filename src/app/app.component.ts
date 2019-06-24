@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'restoran-kafilerija';
-  glupostiNaAjbubenu = "Պրվոկլասնա կերեթինա ի մաճետինա";
-  glupostiNaMhedruliju = "პონეკი ფუთ ბუდე ი პტიცა იზ ოლუკა";
 }

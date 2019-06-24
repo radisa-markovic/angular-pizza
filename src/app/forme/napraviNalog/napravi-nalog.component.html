@@ -1,0 +1,33 @@
+<ng-container>
+  <h2>Napravi nalog: </h2>
+  <form [formGroup]="forma">
+    <div class="form-group">
+      <label for="inputIme">Ime:</label>
+      <input formControlName="ime" type="text" id="inputIme" class="form-control">
+      <div class="alert alert-danger" *ngIf="!forma.controls['ime'].valid && forma.controls['ime'].touched">
+        {{ porukaOGresci }}
+      </div>
+
+      <label for="inputPrezime">Prezime:</label>
+      <input formControlName="prezime" type="text" id="inputPrezime" class="form-control">
+      <div class="alert alert-danger" *ngIf="!forma.controls['prezime'].valid && forma.controls['prezime'].touched">
+        {{ porukaOGresci }}
+      </div>
+
+      <label for="inputKorisnickoIme">Korisničko ime:</label>
+      <input formControlName="korisnickoIme" type="text" id="inputKorisnickoIme" class="form-control">
+      <div class="alert alert-danger"
+        *ngIf="!forma.controls['korisnickoIme'].valid && forma.controls['korisnickoIme'].touched">
+        Korisnicko ime mora biti duzine 4
+      </div>
+
+      <label for="inputLozinka">Lozinka:</label>
+      <input formControlName="lozinka" type="password" id="inputLozinka" class="form-control">
+      <div class="alert alert-danger" *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
+        Lozinka mora biti duzine 7
+      </div>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="!forma.valid">Potvrdi</button>
+  </form>
+</ng-container>
