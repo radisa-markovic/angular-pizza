@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { StoreModule } from '@ngrx/store';
+import { reducer as reducerKorisnici } from './store/reduceri/korisnici.reducer'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PicaComponent } from './proizvodi/komponente/pica/pica.component';
@@ -27,7 +30,10 @@ import { PrijaviSeComponent } from './forme/prijaviSe/prijavi-se.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({
+      korisnici: reducerKorisnici
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

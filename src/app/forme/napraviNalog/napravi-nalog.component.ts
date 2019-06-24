@@ -13,7 +13,7 @@ export class NapraviNalogComponent implements OnInit {
   prezime: string;
   korisnickoIme: string;
   lozinka: string;
-  porukaOGresci: string = "Oznaceno polje se mora ispuniti";
+  porukaOGresci: string = "Označeno polje se mora ispuniti";
 
   constructor(private formBuilder: FormBuilder) { }
 
