@@ -1,11 +1,25 @@
 <header>
   <h1>Restoran Kafilerija</h1>
   <nav class="navbar navbar-default">
-    <a routerLink="/" class="navbar-brand">Početna stranica</a>
-    <a routerLink="/pica" class="navbar-brand">Pica</a>
-    <a routerLink="/napraviNalog" class="navbar-brand">Napravi nalog</a>
-    <a routerLink="/prijaviSe" class="navbar-brand">Prijavi se</a>
-    <a routerLink="/trenutnaPorudzbina" class="navbar-brand">Trenutna porudžbina</a>
-    <a routerLink="/odjaviSe" class="navbar-brand">Odjavi se</a>
+    <a routerLink="/" class="navbar-brand" [routerLinkActive]="'navbar'" [routerLinkActiveOptions]="{exact:true}">
+      Početna stranica
+    </a>
+    <a routerLink="/pica" class="navbar-brand" [routerLinkActive]="'navbar'" [routerLinkActiveOptions]="{exact:true}">
+      Pica
+    </a>
+    <a routerLink="/napraviNalog" class="navbar-brand" [routerLinkActive]="'navbar'"
+      [routerLinkActiveOptions]="{exact:true}">
+      Napravi nalog
+    </a>
+    <a routerLink="/prijaviSe" class="navbar-brand" [routerLinkActive]="'navbar'"
+      [routerLinkActiveOptions]="{exact:true}">
+      Prijavi se
+    </a>
+    <a routerLink="/trenutnaPorudzbina" class="navbar-brand" [routerLinkActive]="'navbar'"
+      [routerLinkActiveOptions]="{exact:true}">
+      Trenutna porudžbina
+    </a>
+    <a routerLink="#" (click)="odjaviKorisnika($event)" class="navbar-brand">Odjavi se</a>
+    <!--Ovo ce da odjavljuje, nema svoju komponentu, al bi trebalo da imam *ngIf u buducnosti-->
   </nav>
 </header>

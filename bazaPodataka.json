@@ -1,4 +1,27 @@
 {
+  "korisnici": [
+    {
+      "id": 1,
+      "ime": "Radisa",
+      "prezime": "Markovic",
+      "korisnickoIme": "radeCU",
+      "lozinka": "idiotLenjiCuprijski"
+    },
+    {
+      "id": 4,
+      "ime": "Ana",
+      "prezime": "Nikolic",
+      "korisnickoIme": "anaaa",
+      "lozinka": "maNemojDaSeKrijesDaTeJeSram"
+    },
+    {
+      "id": 2,
+      "ime": "Gebhard Leberecht",
+      "prezime": "von Blücher",
+      "korisnickoIme": "marschallVorwarts",
+      "lozinka": "vaterlo"
+    }
+  ],
   "sastojci": [
     {
       "id": 1,

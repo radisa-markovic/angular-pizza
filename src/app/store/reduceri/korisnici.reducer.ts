@@ -10,7 +10,7 @@ const pocetnoStanje: KorisnickoStanje = {
   nizSvihKorisnika: []
 };
 
-export function reducer(stanje = pocetnoStanje, akcija: Action): KorisnickoStanje {
+export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): KorisnickoStanje {
   switch (akcija.type) {
     case akcijeKorisnici.UCITAJ_KORISNIKE:
       {

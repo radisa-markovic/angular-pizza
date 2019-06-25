@@ -11,6 +11,12 @@ export class UcitajKorisnike implements Action {
   constructor(public ucitaniKorisnici: Korisnik[]) { };
 }
 
+//dodato je jer sam se iznervirao kao govedo najvece dok sam namestao jedan mrtvi efekat...
+export class UcitajJEDNOGKorisnika implements Action {
+  readonly type = "[Korisnici] Ucitaj jednog korisnika"
+  constructor(public jedanOdvratniKorisnik: Korisnik) { }
+}
+
 export class RegistrujKorisnika implements Action {
   readonly type = REGISTRUJ_KORISNIKA;
   constructor(public payload: Korisnik) { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Sastojak } from '../../modeli/Sastojak.model';
-import { SastojciService } from '../../servisi/sastojci.service';
+import { SastojciService } from '../../../servisi/sastojci.service';
 
 @Component({
   selector: 'app-pica',

@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
-import { reducer as reducerKorisnici } from './store/reduceri/korisnici.reducer'
+import { korisniciReducer } from './store/reduceri/korisnici.reducer'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { HeaderComponent } from './stranice/header/header.component';
 import { PocetnaStranicaComponent } from './stranice/pocetnaStranica/pocetna-stranica.component';
 import { NapraviNalogComponent } from './forme/napraviNalog/napravi-nalog.component';
 import { PrijaviSeComponent } from './forme/prijaviSe/prijavi-se.component';
+import { EffectsModule } from '@ngrx/effects';
+import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,9 @@ import { PrijaviSeComponent } from './forme/prijaviSe/prijavi-se.component';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      korisnici: reducerKorisnici
-    })
+      korisnici: korisniciReducer
+    }),
+    EffectsModule.forRoot([KorisniciEfekti])
   ],
   providers: [],
   bootstrap: [AppComponent]
