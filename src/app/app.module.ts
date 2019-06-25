@@ -16,6 +16,7 @@ import { NapraviNalogComponent } from './forme/napraviNalog/napravi-nalog.compon
 import { PrijaviSeComponent } from './forme/prijaviSe/prijavi-se.component';
 import { EffectsModule } from '@ngrx/effects';
 import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
     StoreModule.forRoot({
       korisnici: korisniciReducer
     }),
-    EffectsModule.forRoot([KorisniciEfekti])
+    EffectsModule.forRoot([KorisniciEfekti]),
+    StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [],
   bootstrap: [AppComponent]

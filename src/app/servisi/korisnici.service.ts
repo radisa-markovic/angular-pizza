@@ -13,12 +13,10 @@ export class KorisniciService {
 
   constructor(private httpKlijent: HttpClient) { }
 
-  //iz nekog razloga on dva puta pokusava da upise korisnika...
   upisiKorisnikaUBazu(noviKorisnik: Korisnik): Observable<Korisnik> {
     return this.httpKlijent.post<Korisnik>(this.putanjaDoKorisnika, noviKorisnik)
       .pipe(
-        catchError((greska: any) => Observable.throw(greska)),
-        tap((vrednost) => console.log(vrednost))
+        catchError((greska: any) => Observable.throw(greska))
       );
   }
 

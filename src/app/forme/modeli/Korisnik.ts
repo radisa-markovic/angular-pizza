@@ -1,6 +1,6 @@
 export interface Korisnik
 {
-  id: number,
+  id: string,
   ime: string,
   prezime: string,
   korisnickoIme: string,

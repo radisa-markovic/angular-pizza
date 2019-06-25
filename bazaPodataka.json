@@ -1,25 +1,11 @@
 {
   "korisnici": [
     {
-      "id": 1,
-      "ime": "Radisa",
-      "prezime": "Markovic",
-      "korisnickoIme": "radeCU",
-      "lozinka": "idiotLenjiCuprijski"
-    },
-    {
-      "id": 4,
-      "ime": "Ana",
-      "prezime": "Nikolic",
-      "korisnickoIme": "anaaa",
-      "lozinka": "maNemojDaSeKrijesDaTeJeSram"
-    },
-    {
-      "id": 2,
-      "ime": "Gebhard Leberecht",
-      "prezime": "von Blücher",
-      "korisnickoIme": "marschallVorwarts",
-      "lozinka": "vaterlo"
+      "id": "70dad500-4cf7-427a-9ad6-b69d8f206a92",
+      "ime": "Santiago",
+      "prezime": "Kanjizares",
+      "korisnickoIme": "santiago",
+      "lozinka": "12345678"
     }
   ],
   "sastojci": [
