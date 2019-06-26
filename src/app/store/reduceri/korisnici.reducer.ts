@@ -3,14 +3,15 @@ import * as akcijeKorisnici from '../akcije/korisnici.akcije';
 import { Action, createFeatureSelector, State } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-//ovde sam dodao dosta ovih [] za nizove
 export interface KorisnickoStanje extends EntityState<Korisnik> { }
 
 export const adapter: EntityAdapter<Korisnik> = createEntityAdapter<Korisnik>({
-  selectId: nekiDjavo => nekiDjavo.id
+  selectId: podatak => podatak.korisnickoIme
 });
 
 const pocetnoStanje: KorisnickoStanje = adapter.getInitialState();
+
+
 
 export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): KorisnickoStanje {
   switch (akcija.type) {
@@ -21,24 +22,23 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
 
     case akcijeKorisnici.REGISTRUJ_KORISNIKA:
       {
-        console.log(stanje); //dodao je samo jednog
-        console.log((akcija as akcijeKorisnici.RegistrujKorisnika).payload);
-        return adapter.addOne((akcija as akcijeKorisnici.RegistrujKorisnika).payload, stanje);
+        let { payload } = (akcija as akcijeKorisnici.RegistrujKorisnika);
+        console.log(payload); //morao bih da sprecim da se ovo upise, tj ono se i sprecava, al da bude unikat...
+        return adapter.addOne(payload, stanje);
       }
 
-    default: 
+    default:
       {
-        console.log(stanje);
         return stanje;
       }
   }
 }
 
-//sad da napravim selektore
-//export const selektorStanjaKorisnika = createFeatureSelector<KorisnickoStanje>('korisnik');//valjda se ovako zove u onom forRoot
-
-/* mozda zajebava, ne znam zasto
+//selektori pending...
+export const vratiSveKorisnikeUStanju = createFeatureSelector<KorisnickoStanje>('korisnici');//ne znam dal ovo iz store-a uzimam...
 export const {
-  selectAll //ne mogu da ubacujem "srpske" nazive, ovo su njihovi fabricki
-} = adapter.getSelectors(selektorStanjaKorisnika);
-*/
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal
+} = adapter.getSelectors(vratiSveKorisnikeUStanju); //i sad sam kao izvukao neki pistolj

@@ -10,6 +10,7 @@ import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
 import { Observable } from 'rxjs';
 import { Korisnik } from '../modeli/Korisnik';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-napravi-nalog',
@@ -31,6 +32,8 @@ export class NapraviNalogComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.korisnici = this.store.select(korisnickiReducer.selectAll);//ovo je observable valjda
+
     this.forma = this.formBuilder.group({
       'ime': [null, Validators.required],
       'prezime': [null, Validators.required],
@@ -42,15 +45,34 @@ export class NapraviNalogComponent implements OnInit {
   registrujKorisnika(): void {
     const { ime, prezime, korisnickoIme, lozinka } = this.forma.value;
 
-    let noviKorisnik: Korisnik = {
-      id: identifikator.v4(),
-      ime: ime,
-      prezime: prezime,
-      korisnickoIme: korisnickoIme, //ovo cu posle da stavim da bude unikatno
-      lozinka: lozinka
-    };
-    //ovo trebam da sprecim ako je korisnicko ime zauzeto, al za sada cu da ga namestim da radi
-    this.store.dispatch(new akcijeKorisnika.RegistrujKorisnika(noviKorisnik));
-    this.router.navigate(["/prijaviSe"]);
+    let imeJeZauzeto = this.proveriKorisnickoIme(korisnickoIme);
+    console.log(imeJeZauzeto); //true= imam korisnicko ime
+
+    if(!imeJeZauzeto)
+    {
+      let noviKorisnik: Korisnik = {
+        id: identifikator.v4(),
+        ime: ime,
+        prezime: prezime,
+        korisnickoIme: korisnickoIme, //ovo cu posle da stavim da bude unikatno
+        lozinka: lozinka
+      };
+      this.store.dispatch(new akcijeKorisnika.RegistrujKorisnika(noviKorisnik));
+      this.router.navigate(["/prijaviSe"]);
+    }
+    else
+    {
+      alert(`Korisnicko ime je zauzeto, posle cu uraditi logiku i iscrtavanje`);
+    }
+  }
+
+  proveriKorisnickoIme(korisnickoIme: any): boolean {
+    let nekaPromenljiva: Object;
+    this.store.select(korisnickiReducer.selectEntities).subscribe(vrednost => {
+      nekaPromenljiva = vrednost;
+    });
+    console.log(nekaPromenljiva);
+   
+    return (nekaPromenljiva.hasOwnProperty(korisnickoIme));
   }
 }
