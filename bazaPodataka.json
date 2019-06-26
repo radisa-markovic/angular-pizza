@@ -1,20 +1,55 @@
 {
-  "korisnici": [],
+  "korisnici": [
+    {
+      "id": "53442cff-651f-484d-91f8-480a7962296a",
+      "ime": "Nikola",
+      "prezime": "Simic",
+      "korisnickoIme": "nidza",
+      "lozinka": "1234567"
+    }
+  ],
   "sastojci": [
     {
       "id": 1,
-      "naziv": "Pečurke",
-      "cena": 40
+      "naziv": "Masline",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/masline.jpg",
+      "cena": 50
     },
     {
       "id": 2,
-      "naziv": "Kisela pavlaka",
-      "cena": 30
+      "naziv": "Šampinjoni",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/sampinjoni.jpg",
+      "cena": 40
     },
     {
       "id": 3,
-      "naziv": "Ljuta papričica",
-      "cena": 35
+      "naziv": "Kulen",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/kulen.jpg",
+      "cena": 140
+    },
+    {
+      "id": 4,
+      "naziv": "Šunka",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/sunka.jpg",
+      "cena": 110
+    },
+    {
+      "id": 5,
+      "naziv": "Pršuta",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/prsuta.jpg",
+      "cena": 190
+    },
+    {
+      "id": 6,
+      "naziv": "Sir",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/sir.jpg",
+      "cena": 130
+    },
+    {
+      "id": 7,
+      "naziv": "Ljuti sos",
+      "putanjaDoSlike": "../../../../assets/slikeSastojaka/ljutiSos.jpg",
+      "cena": 100
     }
   ]
 }

@@ -7,7 +7,7 @@ import { Sastojak } from '../../modeli/Sastojak.model';
   styleUrls: ['./sastojak.component.css']
 })
 export class SastojakComponent implements OnInit {
-  @Input() sastojak: Sastojak;
+  @Input() sastojak: Sastojak;//trebam da povezem sa ngrx efektima, a treba mi i putanja do slike
 
   constructor() { }
 
@@ -15,6 +15,7 @@ export class SastojakComponent implements OnInit {
   }
 
   selektujSastojak(sastojak: Sastojak) {
-    alert(`Gna yams kwjs, izvaibaepnfhous ymxoge skoufhn`);
+    alert(`Uciniti da ovo baca akciju neku koja se posle sabira sa cenom, tipa pica.reducer, ne znam...`);
+    console.log(sastojak);
   }
 }

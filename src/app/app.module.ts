@@ -35,7 +35,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      korisnici: korisniciReducer
+      korisnici: korisniciReducer,
+      nekoJePrijavljen: korisniciReducer//semanticki neispravno, nesto samo hocu da vidim
     }),
     EffectsModule.forRoot([KorisniciEfekti]),
     StoreDevtoolsModule.instrument({ maxAge: 25 })

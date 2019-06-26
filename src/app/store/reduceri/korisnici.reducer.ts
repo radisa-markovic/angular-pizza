@@ -27,6 +27,13 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
         return adapter.addOne(payload, stanje);
       }
 
+    case akcijeKorisnici.PRIJAVI_KORISNIKA:
+      {
+        //nekako ovde trebam da promenim properti koji kaze da niko nije prijavljen, i da to gurnem u stanje
+        //mozda da to zagaimpem, pa da se fokusiram na porucivanje i preracunavanje pice i ostalih stvari
+        //to cu posle vecere
+        return stanje;
+      }
     default:
       {
         return stanje;

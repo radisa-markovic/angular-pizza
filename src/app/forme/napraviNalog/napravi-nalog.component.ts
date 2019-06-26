@@ -32,7 +32,7 @@ export class NapraviNalogComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.korisnici = this.store.select(korisnickiReducer.selectAll);//ovo je observable valjda
+    this.korisnici = this.store.select(korisnickiReducer.selectAll);
 
     this.forma = this.formBuilder.group({
       'ime': [null, Validators.required],
@@ -46,7 +46,6 @@ export class NapraviNalogComponent implements OnInit {
     const { ime, prezime, korisnickoIme, lozinka } = this.forma.value;
 
     let imeJeZauzeto = this.proveriKorisnickoIme(korisnickoIme);
-    console.log(imeJeZauzeto); //true= imam korisnicko ime
 
     if(!imeJeZauzeto)
     {
@@ -54,7 +53,7 @@ export class NapraviNalogComponent implements OnInit {
         id: identifikator.v4(),
         ime: ime,
         prezime: prezime,
-        korisnickoIme: korisnickoIme, //ovo cu posle da stavim da bude unikatno
+        korisnickoIme: korisnickoIme,
         lozinka: lozinka
       };
       this.store.dispatch(new akcijeKorisnika.RegistrujKorisnika(noviKorisnik));

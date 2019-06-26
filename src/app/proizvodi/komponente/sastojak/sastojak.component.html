@@ -1,6 +1,17 @@
-<p>
-  <input (change)="selektujSastojak(sastojak)" type="checkbox" name="checkboxSastojak" />
-  {{ sastojak.id }}
-  {{ sastojak.naziv}}
-  {{ sastojak.cena }}
-</p>
+<div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <input (change)="selektujSastojak(sastojak)" type="checkbox" name="checkboxSastojak" />
+        <span class="card-title">{{sastojak.naziv}}</span>
+      </div>
+      <div class="card-body">
+        <img src="{{sastojak.putanjaDoSlike}}" alt="nema slike" />
+      </div>
+      <div class="card-footer">
+        <span class="card-title">Cena: {{sastojak.cena}} RSD</span>
+      </div>
+    </div>
+  </div>
+
+</div>

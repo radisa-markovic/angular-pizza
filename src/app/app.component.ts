@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UcitajKorisnikeUspeh, UcitajKorisnike } from './store/akcije/korisnici.akcije';
+import { GlobalnoStanjeAplikacije } from './app.state';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { UcitajKorisnikeUspeh, UcitajKorisnike } from './store/akcije/korisnici.
 export class AppComponent {
   title = 'restoran-kafilerija';
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<GlobalnoStanjeAplikacije>) {
     this.store.dispatch(new UcitajKorisnike());
   };
 }
