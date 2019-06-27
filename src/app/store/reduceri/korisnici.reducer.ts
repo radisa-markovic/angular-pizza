@@ -1,4 +1,4 @@
-import { Korisnik } from 'src/app/forme/modeli/Korisnik';
+import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import * as akcijeKorisnici from '../akcije/korisnici.akcije';
 import { Action, createFeatureSelector, State } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';

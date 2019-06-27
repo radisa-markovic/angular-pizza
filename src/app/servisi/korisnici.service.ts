@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { Korisnik } from '../forme/modeli/Korisnik';
+import { Korisnik } from '../modeli-podataka/Korisnik.model';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({

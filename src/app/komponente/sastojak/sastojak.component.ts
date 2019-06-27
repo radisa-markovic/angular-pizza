@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Sastojak } from '../../modeli/Sastojak.model';
+import { Sastojak } from '../../modeli-podataka/Sastojak.model';
+import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
+import * as sastojakAkcije from '../../store/akcije/sastojci.akcije';//odvratna putanja
 
 @Component({
   selector: 'app-sastojak',
@@ -9,13 +12,13 @@ import { Sastojak } from '../../modeli/Sastojak.model';
 export class SastojakComponent implements OnInit {
   @Input() sastojak: Sastojak;//trebam da povezem sa ngrx efektima, a treba mi i putanja do slike
 
-  constructor() { }
+  constructor(private store: Store<GlobalnoStanjeAplikacije>) { }
 
   ngOnInit() {
   }
 
   selektujSastojak(sastojak: Sastojak) {
-    alert(`Uciniti da ovo baca akciju neku koja se posle sabira sa cenom, tipa pica.reducer, ne znam...`);
     console.log(sastojak);
+    this.store.dispatch(new sastojakAkcije.DodajSastojak(sastojak));
   }
 }

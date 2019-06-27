@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Nova pica:</h1>
+
+  <div class="row">
+    <!--sutra moram da regulisem picu i da smajim hardkodovanje-->
+    <button class="btn-success">Srednja (27cm prečnik, 400 RSD osnova)</button>
+    <button class="btn-success">Velika (35cm prečnik, 500 RSD osnova)</button>
+    <button class="btn-success">Porodična (50cm prečnik, 600 RSD osnova)</button>
+    <h5>Broj komada</h5>
+    <input type="number" name="inputBrojKomadaPice">
+  </div>
+  <div class="row">
+    <app-sastojak *ngFor="let sastojak of sastojci" [sastojak]="sastojak">
+
+    </app-sastojak>
+  </div>
+
+
+  <button class="btn btn-primary btn-lg" (click)="potvrdiPicu()">Potvrdi</button>
+  <button class="btn btn-danger btn-lg" (click)="vratiSeNaPocetnuStranicu()">Poništi</button>
+</div>

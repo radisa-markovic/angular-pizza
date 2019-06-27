@@ -6,6 +6,27 @@
       "prezime": "Simic",
       "korisnickoIme": "nidza",
       "lozinka": "1234567"
+    },
+    {
+      "id": "0c52cc05-8207-40e2-9149-46ea1faf2636",
+      "ime": "Mihail",
+      "prezime": "Gorbacov",
+      "korisnickoIme": "mikhail",
+      "lozinka": "12345678"
+    },
+    {
+      "id": "ac7dfc2f-ad4d-4a0c-91a2-d2204b342336",
+      "ime": "Sinan",
+      "prezime": "Sakic",
+      "korisnickoIme": "sinan",
+      "lozinka": "sinanNansi"
+    },
+    {
+      "id": "9b8f5ae9-b6f7-4ecc-af5f-b70185cbb5ab",
+      "ime": "Milos",
+      "prezime": "Milanovic",
+      "korisnickoIme": "klompa",
+      "lozinka": "glupSamKaoLetva"
     }
   ],
   "sastojci": [

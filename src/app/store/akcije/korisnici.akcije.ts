@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Korisnik } from 'src/app/forme/modeli/Korisnik';
+import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 
 export const UCITAJ_KORISNIKE: string = '[Korisnici] Ucitaj korisnike';
 export const UCITAJ_KORISNIKE_USPEH: string = '[Korisnici] Ucitaj korisnike uspeh';

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
-import { Effect, Actions, ofType, createEffect } from '@ngrx/effects';
+import { Effect, Actions, ofType } from '@ngrx/effects';
 
 import * as akcijeKorisnici from '../akcije/korisnici.akcije';
 import * as korisniciServis from '../../servisi/korisnici.service';
-import { switchMap, mergeMap, catchError, map } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 @Injectable()
 export class KorisniciEfekti {

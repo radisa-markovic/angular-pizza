@@ -4,9 +4,8 @@ import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Korisnik } from '../modeli/Korisnik';
+import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
-import { AlertPromise } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-prijavi-se',

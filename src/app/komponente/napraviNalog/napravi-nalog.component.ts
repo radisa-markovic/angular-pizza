@@ -9,7 +9,7 @@ import { GlobalnoStanjeAplikacije } from '../../app.state';
 import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
 import { Observable } from 'rxjs';
-import { Korisnik } from '../modeli/Korisnik';
+import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import { map, tap } from 'rxjs/operators';
 
 @Component({

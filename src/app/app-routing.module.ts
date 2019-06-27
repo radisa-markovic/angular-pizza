@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PicaComponent } from './proizvodi/komponente/pica/pica.component';
-import { PocetnaStranicaComponent } from './stranice/pocetnaStranica/pocetna-stranica.component';
-import { NapraviNalogComponent } from './forme/napraviNalog/napravi-nalog.component';
-import { PrijaviSeComponent } from './forme/prijaviSe/prijavi-se.component';
+import { PicaComponent } from './komponente/pica/pica.component';
+import { PocetnaStranicaComponent } from './komponente/pocetnaStranica/pocetna-stranica.component';
+import { NapraviNalogComponent } from './komponente/napraviNalog/napravi-nalog.component';
+import { PrijaviSeComponent } from './komponente/prijaviSe/prijavi-se.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaStranicaComponent },

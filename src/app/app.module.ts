@@ -5,15 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { korisniciReducer } from './store/reduceri/korisnici.reducer'
+import { picaReducer } from './store/reduceri/pica.reducer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PicaComponent } from './proizvodi/komponente/pica/pica.component';
-import { SastojakComponent } from './proizvodi/komponente/sastojak/sastojak.component';
-import { HeaderComponent } from './stranice/header/header.component';
-import { PocetnaStranicaComponent } from './stranice/pocetnaStranica/pocetna-stranica.component';
-import { NapraviNalogComponent } from './forme/napraviNalog/napravi-nalog.component';
-import { PrijaviSeComponent } from './forme/prijaviSe/prijavi-se.component';
+import { PicaComponent } from './komponente/pica/pica.component';
+import { SastojakComponent } from './komponente/sastojak/sastojak.component';
+import { HeaderComponent } from './komponente/header/header.component';
+import { PocetnaStranicaComponent } from './komponente/pocetnaStranica/pocetna-stranica.component';
+import { NapraviNalogComponent } from './komponente/napraviNalog/napravi-nalog.component';
+import { PrijaviSeComponent } from './komponente/prijaviSe/prijavi-se.component';
 import { EffectsModule } from '@ngrx/effects';
 import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
@@ -35,8 +36,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      korisnici: korisniciReducer,
-      nekoJePrijavljen: korisniciReducer//semanticki neispravno, nesto samo hocu da vidim
+      korisnici: korisniciReducer, //svako mora neki svoj reducer da dobije mislim, zavisi...
+      narudzbina: picaReducer,
+      pice: picaReducer,
+      sastojak: picaReducer
     }),
     EffectsModule.forRoot([KorisniciEfekti]),
     StoreDevtoolsModule.instrument({ maxAge: 25 })
