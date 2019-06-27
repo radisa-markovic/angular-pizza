@@ -1,7 +1,5 @@
-import { Sastojak } from './Sastojak.model';
-
-export interface Pica
-{
+export interface Pica {
   id: number,
-  osnovnaCena: number
+  osnovnaCena: number,
+  nizSastojaka: string[] //ova normalizacija podrazumeva drugacije razmisljanje, tipa moram kljuceve da pamtim...
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 
+import * as picaAkcije from '../../store/akcije/pica.akcije';
 import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
 
 @Component({
@@ -13,8 +14,9 @@ import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
   styleUrls: ['./pica.component.css']
 })
 export class PicaComponent implements OnInit {
-  private osnovnaCena: number;
-  private sastojci: Sastojak[];
+  private osnovnaCena: number;//ovo treba da pokupi vrednost sa forme
+  private ukupnaCena: number;//ovo se preracunava, pa se stampa na ekranu posle
+  private sastojci: Sastojak[];//isti moj kao ono gore
 
   constructor(private store: Store<GlobalnoStanjeAplikacije>
     , private sastojciService: SastojciService,
@@ -28,12 +30,23 @@ export class PicaComponent implements OnInit {
   }
 
   promeniVelicinuPice(event: Event): void {
-    let radioButton = event.target as HTMLInputElement;//bez ovoga typescript smara
-    alert(`Nova vrednost pice je ${radioButton.value}`); //da vidim nesto
+    let radioButton: HTMLInputElement = event.target as HTMLInputElement;//bez ovoga typescript smara
+    this.osnovnaCena = parseInt(radioButton.value);
+    //1 je ovde sporna vrednost, tj hardkodovana je... mozda da ne saljem jos akciju, prvo da napravim vrednosti
+   
+    //djoka, nemam snage
+    //this.store.dispatch(new picaAkcije.PromeniVelicinuPice('1', { osnovnaCena: novaOsnovnaVrednostPice }));
   }
 
   potvrdiPicu() {
     alert(`redirekcija, upis u bazu, i posle pregled porudzbine u onoj kartici, odakle se ovo iz baze vadi`);
+
+    this.store.dispatch(new picaAkcije.DodajNovuPicu({
+      id: 13,
+      osnovnaCena: 400,
+      nizSastojaka: [] //ovo treba da se azurira nekako, sad nemam energije da vidim kako, ode mi volja i energija u djavola
+      //vtal fhai yais vaikavt wmxa aggwvnga zamxpyxnteis?
+    }));
   }
 
   vratiSeNaPocetnuStranicu() {

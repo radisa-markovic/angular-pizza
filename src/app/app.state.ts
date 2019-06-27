@@ -6,5 +6,5 @@ import { Pica } from './modeli-podataka/Pica.model';
 export interface GlobalnoStanjeAplikacije {
   korisnici: Korisnik[],
   pice: Pica[]
-  nekoJePrijavljen: boolean //ovo se ne vidi kako treba u devTools-u
+  nekoJePrijavljen: boolean 
 }
