@@ -1,6 +1,6 @@
 import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import * as akcijeKorisnici from '../akcije/korisnici.akcije';
-import { Action, createFeatureSelector, State } from '@ngrx/store';
+import { Action, createFeatureSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 export interface KorisnickoStanje extends EntityState<Korisnik> { }
@@ -11,8 +11,6 @@ export const adapter: EntityAdapter<Korisnik> = createEntityAdapter<Korisnik>({
 
 const pocetnoStanje: KorisnickoStanje = adapter.getInitialState();
 
-
-
 export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): KorisnickoStanje {
   switch (akcija.type) {
     case akcijeKorisnici.UCITAJ_KORISNIKE_USPEH:
@@ -22,8 +20,8 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
 
     case akcijeKorisnici.REGISTRUJ_KORISNIKA:
       {
+        console.log(stanje);
         let { payload } = (akcija as akcijeKorisnici.RegistrujKorisnika);
-        console.log(payload); //morao bih da sprecim da se ovo upise, tj ono se i sprecava, al da bude unikat...
         return adapter.addOne(payload, stanje);
       }
 
@@ -41,11 +39,10 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
   }
 }
 
-//selektori pending...
-export const vratiSveKorisnikeUStanju = createFeatureSelector<KorisnickoStanje>('korisnici');//ne znam dal ovo iz store-a uzimam...
+export const vratiSveKorisnikeUStanju = createFeatureSelector<KorisnickoStanje>('korisnici');
 export const {
   selectIds,
   selectEntities,
   selectAll,
   selectTotal
-} = adapter.getSelectors(vratiSveKorisnikeUStanju); //i sad sam kao izvukao neki pistolj
+} = adapter.getSelectors(vratiSveKorisnikeUStanju);

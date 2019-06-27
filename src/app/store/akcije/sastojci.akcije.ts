@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { Sastojak } from '../../modeli-podataka/Sastojak.model';
 
 export const UCITAJ_SASTOJKE: string = '[Sastojak] Ucitaj sastojke';
-export const UCITAJ_SASTOJKE_USPEH: string = '[Sastojak] Ucitaj sastojke';
+export const UCITAJ_SASTOJKE_USPEH: string = '[Sastojak] Ucitaj sastojke uspeh';
 export const DODAJ_SASTOJAK: string = '[Sastojak] Dodaj sastojak';
 export const UKLONI_SASTOJAK: string = '[Sastojak] Ukloni sastojak';
 

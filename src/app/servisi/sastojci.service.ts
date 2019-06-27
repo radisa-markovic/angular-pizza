@@ -10,11 +10,12 @@ import { Sastojak } from '../modeli-podataka/Sastojak.model';
   providedIn: 'root'
 })
 export class SastojciService {
-  URLSastojaka: string = "http://localhost:3000/sastojci";//jos samo da instaliram json-server
+  URLSastojaka: string = "http://localhost:3000/sastojci"; //da vidim dal ovo radi
 
   constructor(private httpKlijent: HttpClient) { }
 
   vratiSastojke(): Observable<Sastojak[]> {
+    console.log("Robotnicki");
     return this.httpKlijent.get<Sastojak[]>(this.URLSastojaka);
   }
 }

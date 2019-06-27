@@ -33,6 +33,7 @@ export class NapraviNalogComponent implements OnInit {
 
   ngOnInit() {
     this.korisnici = this.store.select(korisnickiReducer.selectAll);
+    this.korisnici.subscribe(korisnici => console.log(korisnici));
 
     this.forma = this.formBuilder.group({
       'ime': [null, Validators.required],

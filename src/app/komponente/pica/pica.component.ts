@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 
+import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
+
 @Component({
   selector: 'app-pica',
   templateUrl: './pica.component.html',
@@ -19,7 +21,10 @@ export class PicaComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-   // this.sastojci = this.store.select();//poseban folder za selektore...
+    let selekcija = this.store.select(sastojakSelektor.selectAll);
+    selekcija.subscribe(ucitaniSastojci => {
+      this.sastojci = ucitaniSastojci
+    });
   }
 
   potvrdiPicu() {

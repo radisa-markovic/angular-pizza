@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { korisniciReducer } from './store/reduceri/korisnici.reducer'
 import { picaReducer } from './store/reduceri/pica.reducer';
+import { reducerSastojaka } from './store/reduceri/sastojci.reducer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +17,9 @@ import { PocetnaStranicaComponent } from './komponente/pocetnaStranica/pocetna-s
 import { NapraviNalogComponent } from './komponente/napraviNalog/napravi-nalog.component';
 import { PrijaviSeComponent } from './komponente/prijaviSe/prijavi-se.component';
 import { EffectsModule } from '@ngrx/effects';
+
 import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
+import { SastojciEfekti } from './store/efekti/sastojci.efekti';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
@@ -39,9 +42,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
       korisnici: korisniciReducer, //svako mora neki svoj reducer da dobije mislim, zavisi...
       narudzbina: picaReducer,
       pice: picaReducer,
-      sastojak: picaReducer
+      sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem
     }),
-    EffectsModule.forRoot([KorisniciEfekti]),
+    EffectsModule.forRoot([KorisniciEfekti, SastojciEfekti]), //ovde stimujem efekte valjda
     StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [],
