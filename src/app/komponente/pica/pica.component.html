@@ -1,13 +1,25 @@
 <div class="container">
   <h1>Nova pica:</h1>
 
-  <div class="row">
-    <!--sutra moram da regulisem picu i da smajim hardkodovanje-->
-    <button class="btn-success">Srednja (27cm prečnik, 400 RSD osnova)</button>
-    <button class="btn-success">Velika (35cm prečnik, 500 RSD osnova)</button>
-    <button class="btn-success">Porodična (50cm prečnik, 600 RSD osnova)</button>
+  <div class="btn-group-vertical">
+    <!--sutra moram da regulisem picu i da smajim hardkodovanje, pogotovo za cene ove-->
+    <label>
+      <input type="radio" name="radioButtonVelicinaPice" class="form-check-input" checked="true"
+        (change)="promeniVelicinuPice($event)" value=400 />
+      Srednja (27cm prečnik, 400 RSD osnova)
+    </label>
+    <label>
+      <input type="radio" name="radioButtonVelicinaPice" class="form-check-input" (change)="promeniVelicinuPice($event)"
+        value=500 />
+      Velika (35cm prečnik, 500 RSD osnova)
+    </label>
+    <label>
+      <input type="radio" name="radioButtonVelicinaPice" class="form-check-input" (change)="promeniVelicinuPice($event)"
+        value="600" />
+      Porodična (50cm prečnik, 600 RSD osnova)
+    </label>
     <h5>Broj komada</h5>
-    <input type="number" name="inputBrojKomadaPice">
+    <input type="number" name="inputBrojKomadaPice" required value=1>
   </div>
   <div class="row">
     <app-sastojak *ngFor="let sastojak of sastojci" [sastojak]="sastojak">

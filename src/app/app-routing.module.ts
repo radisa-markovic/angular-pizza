@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: '', component: PocetnaStranicaComponent },
   { path: 'pica', component: PicaComponent },
   { path: 'napraviNalog', component: NapraviNalogComponent },
-  { path: 'prijaviSe', component: PrijaviSeComponent }
+  { path: 'prijaviSe', component: PrijaviSeComponent },
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
