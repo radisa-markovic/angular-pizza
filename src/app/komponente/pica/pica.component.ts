@@ -14,16 +14,17 @@ import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
   styleUrls: ['./pica.component.css']
 })
 export class PicaComponent implements OnInit {
-  private osnovnaCena: number;//ovo treba da pokupi vrednost sa forme
-  private ukupnaCena: number;//ovo se preracunava, pa se stampa na ekranu posle
-  private sastojci: Sastojak[];//isti moj kao ono gore
+  osnovnaCena: number;//ovo treba da pokupi vrednost sa forme
+  ukupnaCena: number;//ovo se preracunava, pa se stampa na ekranu posle
+  sastojci: Sastojak[];//ovo mi treba da ucita sastojke, sad, dal trebam ovo da izbacim?
+  //tacnije, da napravim "element narudzbine" natklasu koja ce da hvata proizvod i sastojke?
 
   constructor(private store: Store<GlobalnoStanjeAplikacije>
     , private sastojciService: SastojciService,
     private router: Router) { }
 
   ngOnInit() {
-    let selekcija = this.store.select(sastojakSelektor.selectAll);
+    let selekcija = this.store.select(sastojakSelektor.selectAll); //ovde dobijam sastojke, pa ih iscrtavam
     selekcija.subscribe(ucitaniSastojci => {
       this.sastojci = ucitaniSastojci
     });
