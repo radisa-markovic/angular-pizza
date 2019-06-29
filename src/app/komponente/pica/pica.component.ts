@@ -19,10 +19,9 @@ export class PicaComponent implements OnInit {
   cenaOdSastojaka: number;
   brojKomada: number;
   ukupnaCena: number;
-  sastojci: Sastojak[]; //svi sastojci ikad u istoriji (forma je u ptanju)
-  //u store valjda na klik trebam da prosledim kliknutu stvar
-  //da li to znaci da ove promenljive komponente i u store-u nisu obavezno isto? valjda
-
+  sastojci: Sastojak[];
+  
+  cekiraniSastojci: number[] = [];
   constructor(private store: Store<GlobalnoStanjeAplikacije>,
               private router: Router) { }
 
@@ -67,27 +66,28 @@ export class PicaComponent implements OnInit {
 
   klikniNaSastojak(event: Event, sastojak: Sastojak): void
   {
-    console.log(event);
-    console.log(sastojak);
+
     let cekiraniSastojak: HTMLInputElement = <HTMLInputElement>event.target;//druga vrsta cast-ovanja
-    console.log(cekiraniSastojak);
-    if(!cekiraniSastojak.checked) //fora je sto se klik registruje za sve, ne samo checkbox, tj klik se dodaje svemu
+    if(cekiraniSastojak.checked) //fora je sto se klik registruje za sve, ne samo checkbox, tj klik se dodaje svemu
     {
+      this.cekiraniSastojci.push(sastojak.id);
       this.cenaOdSastojaka += sastojak.cena;
       this.ukupnaCena = this.preracunajUkupnuCenu();//mozda void?
     }
     else
     {
+      this.cekiraniSastojci = this.cekiraniSastojci.filter(identifikatori => identifikatori !== sastojak.id);
       this.cenaOdSastojaka -= sastojak.cena;
       this.ukupnaCena = this.preracunajUkupnuCenu();
     }
+    console.log(this.cekiraniSastojci);
   }
 
   potvrdiPicu() {
     alert(`redirekcija, upis u bazu, i posle pregled porudzbine u onoj kartici, odakle se ovo iz baze vadi`);
     //ako sam danas pohvatao nesto, to je da trebam da iz baze selektujem cekirane sastojke nekako
     //pa da prosledim u ovaj mrtvi proizvod, tj u narudzbinu... nego poznavam
-    this.store.dispatch(new proizvodAkcije.DodajNoviProizvod()); //najruznija akcija koju sam napisao do sada
+    //this.store.dispatch(new proizvodAkcije.DodajNoviProizvod()); //najruznija akcija koju sam napisao do sada
   }
 
   vratiSeNaPocetnuStranicu() {

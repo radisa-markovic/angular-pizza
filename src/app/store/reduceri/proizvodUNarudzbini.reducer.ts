@@ -5,19 +5,23 @@ import * as akcijeProizvodi from '../akcije/proizvod.akcije';
 import { Action } from '@ngrx/store';
 import { Sastojak } from 'src/app/modeli-podataka/Sastojak.model';
 
-export interface StanjeJednogProizvoda {
+export interface Narudzbina {
   id: number,
   naziv: string,
-  osnovnaCena: number //ovde kao nemam sastojke, oni idu u porudzbinu, jebem li ga...
+  cena: number,
+  proizvod: string,
+  sastojci: string[] //ovde kao nemam sastojke, oni idu u porudzbinu, jebem li ga...
 }
 
-const pocetnoStanje: StanjeJednogProizvoda = {
+const pocetnoStanje: Narudzbina = {
   id: -12,
   naziv: '',
-  osnovnaCena: 0,
+  cena: 0,
+  proizvod: '',
+  sastojci: []
 }
 
-export function reducerProizvoda(stanje = pocetnoStanje, akcija: Action): StanjeJednogProizvoda {
+export function reducerProizvoda(stanje = pocetnoStanje, akcija: Action): Narudzbina {
   switch (akcija.type) {
     case akcijeProizvodi.DODAJ_NOVI_PROIZVOD:
       {

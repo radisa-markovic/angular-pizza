@@ -22,7 +22,8 @@
     <input type="number" name="inputBrojKomadaPice" (change)="promeniBrojKomada($event)" required value=1>
   </div>
   <div class="row">
-    <app-sastojak *ngFor="let sastojak of sastojci" (click)="klikniNaSastojak($event, sastojak)" [sastojak]="sastojak">
+    <app-sastojak *ngFor="let sastojak of sastojci" [sastojak]="sastojak"
+      (cekiraniSastojak)="klikniNaSastojak($event, sastojak)">
 
     </app-sastojak>
   </div>
