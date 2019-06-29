@@ -17,8 +17,8 @@ export class SastojakComponent implements OnInit {
   ngOnInit() {
   }
 
+  //sad, mozda mi i ne treba ovo ovde...
   selektujSastojak(sastojak: Sastojak) {
-    console.log(sastojak);
     this.store.dispatch(new sastojakAkcije.DodajSastojak(sastojak));
   }
 }

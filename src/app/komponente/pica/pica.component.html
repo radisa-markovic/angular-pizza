@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Nova pica:</h1>
+  <h1>Nova pica: <span>Dosadašnja cena: {{ukupnaCena}} RSD</span></h1>
 
   <div class="btn-group-vertical">
     <!--sutra moram da regulisem picu i da smajim hardkodovanje, pogotovo za cene ove-->
@@ -19,15 +19,15 @@
       Porodična (50cm prečnik, 600 RSD osnova)
     </label>
     <h5>Broj komada</h5>
-    <input type="number" name="inputBrojKomadaPice" required value=1>
+    <input type="number" name="inputBrojKomadaPice" (change)="promeniBrojKomada($event)" required value=1>
   </div>
   <div class="row">
-    <app-sastojak *ngFor="let sastojak of sastojci" [sastojak]="sastojak">
+    <app-sastojak *ngFor="let sastojak of sastojci" (click)="klikniNaSastojak($event, sastojak)" [sastojak]="sastojak">
 
     </app-sastojak>
   </div>
 
 
   <button class="btn btn-primary btn-lg" (click)="potvrdiPicu()">Potvrdi</button>
-  <button class="btn btn-danger btn-lg" (click)="vratiSeNaPocetnuStranicu()">Poništi</button>
+  <button class="btn btn-danger btn-lg" (click)="vratiSeNaPocetnuStranicu()">Nazad</button>
 </div>

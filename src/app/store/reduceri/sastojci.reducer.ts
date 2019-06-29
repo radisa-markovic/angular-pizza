@@ -18,13 +18,11 @@ export function reducerSastojaka(stanje = pocetnoStanjeSastojaka, akcija: Action
   {
     case akcijeSastojci.UCITAJ_SASTOJKE_USPEH:
       {
-        console.log((akcija as akcijeSastojci.UcitajSastojkeUspeh).sastojci);
         return adapterSastojaka.addAll((akcija as akcijeSastojci.UcitajSastojkeUspeh).sastojci, stanje);
       }
 
     default:
       {
-        console.log(stanje);
         return stanje;
       }
   }

@@ -20,7 +20,9 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
 import { SastojciEfekti } from './store/efekti/sastojci.efekti';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component'
+import { reducerProizvoda } from './store/reduceri/proizvodUNarudzbini.reducer';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     HeaderComponent,
     PocetnaStranicaComponent,
     NapraviNalogComponent,
-    PrijaviSeComponent
+    PrijaviSeComponent,
+    NaruciProizvodComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
     StoreModule.forRoot({
       korisnici: korisniciReducer, //svako mora neki svoj reducer da dobije mislim, zavisi...
       narudzbina: picaReducer,
+      jedanProizvod: reducerProizvoda,
       pice: picaReducer,
       sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem
     }),

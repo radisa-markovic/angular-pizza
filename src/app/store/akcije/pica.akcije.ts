@@ -10,12 +10,14 @@ export class DodajNovuPicu implements Action {
   constructor(public novaPica: Pica) { };
 }
 
+
+//popravicu posle nekad, ne znam... takodje naziv je retardiran
 export class PromeniVelicinuPice implements Action {
   readonly type = PROMENI_VELICINU_PICE;
-  constructor(public idPice: string, public izmene: Partial<Pica>) { }; //cenaIzabraneVelicine: number, je u Partial mislim
+  constructor(public novaOsnovnaCena: number) { };
 }
 
 export class PromeniBrojKomadaPice implements Action {
   readonly type = PROMENI_BROJ_KOMADA_PICE;
-  constructor(public idPice: string, public izmene: Partial<Pica>) { }; //novi broj komada cu tu negde da stavim
+  constructor(public noviBrojKomadaPice: number) { };
 }

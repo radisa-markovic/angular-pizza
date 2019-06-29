@@ -15,7 +15,6 @@ export class SastojciService {
   constructor(private httpKlijent: HttpClient) { }
 
   vratiSastojke(): Observable<Sastojak[]> {
-    console.log("Robotnicki");
     return this.httpKlijent.get<Sastojak[]>(this.URLSastojaka);
   }
 }
