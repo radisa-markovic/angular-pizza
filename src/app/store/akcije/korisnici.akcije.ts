@@ -26,10 +26,10 @@ export class RegistrujKorisnika implements Action {
 
 export class PrijaviKorisnika implements Action {
   readonly type = PRIJAVI_KORISNIKA;
-  constructor(public detaljiOPrijavi:Partial<Korisnik>) { };
+  constructor(public korisnik: Korisnik) { }; //idem neoptimalno
 }
 
 export class OdjaviKorisnika implements Action {
   readonly type = ODJAVI_KORISNIKA;
-  constructor(public payload: Korisnik) { }
+  constructor() { }
 }

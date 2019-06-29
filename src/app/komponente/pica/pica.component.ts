@@ -38,11 +38,9 @@ export class PicaComponent implements OnInit {
     });
   }
 
-  //on change je za radio button, ovde bi trebalo da pokupim vrednost za prikaz, a i da bacim akciju...
-  //...koja ce da ode u store
   promeniVelicinuPice(event: Event): void {
-    let radioButton: HTMLInputElement = event.target as HTMLInputElement;//bez ovoga typescript smara
-    this.osnovnaCena = parseInt(radioButton.value); //nemam bacanja akcije nidje
+    let radioButton: HTMLInputElement = event.target as HTMLInputElement;
+    this.osnovnaCena = parseInt(radioButton.value);
     this.ukupnaCena = this.preracunajUkupnuCenu();
   }
 
@@ -55,24 +53,25 @@ export class PicaComponent implements OnInit {
       inputBrojKomada.value = '1';
     }
     else
-       this.brojKomada = noviBrojKomada; //al sam pametan majku mu
+       this.brojKomada = noviBrojKomada;
     this.ukupnaCena = this.preracunajUkupnuCenu();    
   }
 
+  //mozda postoji i lepsa varijanta ovoga
   preracunajUkupnuCenu(): number 
   {
-    return (this.osnovnaCena + this.cenaOdSastojaka) * this.brojKomada; //sastojci?
+    return (this.osnovnaCena + this.cenaOdSastojaka) * this.brojKomada;
   }
 
   klikniNaSastojak(event: Event, sastojak: Sastojak): void
   {
 
-    let cekiraniSastojak: HTMLInputElement = <HTMLInputElement>event.target;//druga vrsta cast-ovanja
-    if(cekiraniSastojak.checked) //fora je sto se klik registruje za sve, ne samo checkbox, tj klik se dodaje svemu
+    let cekiraniSastojak: HTMLInputElement = <HTMLInputElement>event.target;
+    if(cekiraniSastojak.checked)
     {
       this.cekiraniSastojci.push(sastojak.id);
       this.cenaOdSastojaka += sastojak.cena;
-      this.ukupnaCena = this.preracunajUkupnuCenu();//mozda void?
+      this.ukupnaCena = this.preracunajUkupnuCenu();
     }
     else
     {
@@ -91,7 +90,7 @@ export class PicaComponent implements OnInit {
   }
 
   vratiSeNaPocetnuStranicu() {
-    alert(`Vracam se na pocetnu stranicu`);
+    alert(`Vracam se na narudzbine`);
     this.router.navigate(["/naruciProizvod"]);
   }
 }

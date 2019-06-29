@@ -1,7 +1,7 @@
 import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import * as akcijeKorisnici from '../akcije/korisnici.akcije';
 import { Action, createFeatureSelector } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityState, EntityAdapter, createEntityAdapter, Update } from '@ngrx/entity';
 
 export interface KorisnickoStanje extends EntityState<Korisnik> { }
 
@@ -27,11 +27,16 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
 
     case akcijeKorisnici.PRIJAVI_KORISNIKA:
       {
+       /* const update: Update<Korisnik> = {
+          id: "",
+          changes: { narudzbine: [...stanje.entities[].narudzbine, ]}
+        }
+        adapter.updateOne(update, stanje);
         //nekako ovde trebam da promenim properti koji kaze da niko nije prijavljen, i da to gurnem u stanje
         //mozda da to zagaimpem, pa da se fokusiram na porucivanje i preracunavanje pice i ostalih stvari
         //to cu posle vecere
         return stanje;
-      }
+      */}
     default:
       {
         return stanje;

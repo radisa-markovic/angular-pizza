@@ -1,25 +1,27 @@
 <header>
   <h1>El Vertedero</h1>
+  <span *ngIf="this.uiStanje.nekoJePrijavljen">Prijavljeni korisnik: {{ uiStanje.korisnickoIme }}</span>
   <nav class="navbar navbar-default">
     <a routerLink="/" class="navbar-brand" [routerLinkActive]="'navbar'" [routerLinkActiveOptions]="{exact:true}">
       Početna stranica
     </a>
     <a routerLink="/naruciProizvod" class="navbar-brand" [routerLinkActive]="'navbar'"
-      [routerLinkActiveOptions]="{exact:true}">
+      [routerLinkActiveOptions]="{exact:true}" *ngIf="this.uiStanje.nekoJePrijavljen">
       Naruči proizvod
     </a>
     <a routerLink="/napraviNalog" class="navbar-brand" [routerLinkActive]="'navbar'"
-      [routerLinkActiveOptions]="{exact:true}">
+      [routerLinkActiveOptions]="{exact:true}" *ngIf="!this.uiStanje.nekoJePrijavljen">
       Napravi nalog
     </a>
     <a routerLink="/prijaviSe" class="navbar-brand" [routerLinkActive]="'navbar'"
-      [routerLinkActiveOptions]="{exact:true}">
+      [routerLinkActiveOptions]="{exact:true}" *ngIf="!this.uiStanje.nekoJePrijavljen">
       Prijavi se
     </a>
     <a routerLink="/trenutnaPorudzbina" class="navbar-brand" [routerLinkActive]="'navbar'"
-      [routerLinkActiveOptions]="{exact:true}">
+      [routerLinkActiveOptions]="{exact:true}" *ngIf="this.uiStanje.nekoJePrijavljen">
       Trenutna porudžbina
     </a>
-    <a routerLink="#" (click)="odjaviKorisnika($event)" class="navbar-brand">Odjavi se</a>
+    <a routerLink="#" (click)="odjaviKorisnika($event)" class="navbar-brand"
+      *ngIf="this.uiStanje.nekoJePrijavljen">Odjavi se</a>
   </nav>
 </header>

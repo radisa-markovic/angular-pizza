@@ -5,8 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { korisniciReducer } from './store/reduceri/korisnici.reducer'
-import { picaReducer } from './store/reduceri/pica.reducer';
+import { reducerNarudzbine } from './store/reduceri/narudzbina.reducer';
 import { reducerSastojaka } from './store/reduceri/sastojci.reducer';
+import { uiReducer } from './store/reduceri/ui.reducer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +23,6 @@ import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
 import { SastojciEfekti } from './store/efekti/sastojci.efekti';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component'
-import { reducerProizvoda } from './store/reduceri/proizvodUNarudzbini.reducer';
 
 @NgModule({
   declarations: [
@@ -43,9 +43,8 @@ import { reducerProizvoda } from './store/reduceri/proizvodUNarudzbini.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot({
       korisnici: korisniciReducer, //svako mora neki svoj reducer da dobije mislim, zavisi...
-      narudzbina: picaReducer,
-      jedanProizvod: reducerProizvoda,
-      pice: picaReducer,
+      uiStanje: uiReducer,
+      narudzbina: reducerNarudzbine,
       sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem
     }),
     EffectsModule.forRoot([KorisniciEfekti, SastojciEfekti]), //ovde stimujem efekte valjda

@@ -10,7 +10,6 @@ import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
 import { Observable } from 'rxjs';
 import { Korisnik } from '../../modeli-podataka/Korisnik.model';
-import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-napravi-nalog',
@@ -55,7 +54,8 @@ export class NapraviNalogComponent implements OnInit {
         ime: ime,
         prezime: prezime,
         korisnickoIme: korisnickoIme,
-        lozinka: lozinka
+        lozinka: lozinka,
+        narudzbine: []
       };
       this.store.dispatch(new akcijeKorisnika.RegistrujKorisnika(noviKorisnik));
       this.router.navigate(["/prijaviSe"]);

@@ -1,10 +1,12 @@
 import { Korisnik } from './modeli-podataka/Korisnik.model';
-import { Pica } from './modeli-podataka/Pica.model';
+import { Narudzbina } from './store/reduceri/Narudzbina.reducer';
+import { UI } from './store/reduceri/ui.reducer';
 //ako imam jos nesto da dodam ovde, neki jos atribut stanja, ovde bih ga dodao
 
 //ne znam gde pice da ubacim...
 export interface GlobalnoStanjeAplikacije {
   korisnici: Korisnik[],
-  pice: Pica[]
-  nekoJePrijavljen: boolean 
+  UI: UI,
+  narudzbine: Narudzbina[],
+  nekoJePrijavljen: boolean
 }

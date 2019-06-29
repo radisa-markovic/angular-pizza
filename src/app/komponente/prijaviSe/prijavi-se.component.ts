@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
+import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
+import { Dictionary } from '@ngrx/entity';
 
 @Component({
   selector: 'app-prijavi-se',
@@ -17,12 +19,15 @@ export class PrijaviSeComponent implements OnInit {
   korisnickoIme: string;
   lozinka: string;
 
-  //dal mi ovo uopste i treba?
-  korisnici: Observable<Korisnik[]>;//sad, koja je fora; mozda ne trebam ovako, al za sada cu ovako da guram sve ovde
+  korisnici: Object; //jer hocu hasOwnProperty, posto ngrx ima cele 2 prosto prosirene recenice o ovome...
 
   constructor(private formBuilder: FormBuilder,
     private store: Store<GlobalnoStanjeAplikacije>,
-    private router: Router) { }
+    private router: Router) { 
+    this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => {
+      this.korisnici = korisnici;
+    });
+    }
 
   ngOnInit() {
     this.forma = this.formBuilder.group({
@@ -45,15 +50,12 @@ export class PrijaviSeComponent implements OnInit {
     lozinkaJeIspravna ? alert(`Ispravna je lozinka`) : alert(`Neispravna lozinka`);
 
     if (korisnickoImeJeIspravno && lozinkaJeIspravna) {
-      //saljem akciju "PRIJAVI_KORISNIKA", to hvata korisnicki reducer, pa menjam u...
-      //...header-u neke stvari, a idem i redirect na ponudu
-      console.log("Zameniti ovo ispod da pokazuje na bolje stvari");
-      this.router.navigate(["/pica"]);
+      this.store.dispatch(new akcijeKorisnika.PrijaviKorisnika(this.korisnici[korisnickoIme])); //e sad, moram da izvucem korisnika
+      this.router.navigate(["/naruciProizvod"]);
     }
   }
 
   proveriKorisnickoIme(korisnickoIme: string): boolean {
-    console.log("Slobo");
     let sviKorisnici: Object;
     this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => {
       sviKorisnici = korisnici;

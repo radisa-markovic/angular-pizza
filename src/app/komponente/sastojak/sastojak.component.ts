@@ -10,7 +10,7 @@ import * as sastojakAkcije from '../../store/akcije/sastojci.akcije';//odvratna 
   styleUrls: ['./sastojak.component.css']
 })
 export class SastojakComponent implements OnInit {
-  @Input() sastojak: Sastojak;//trebam da povezem sa ngrx efektima, a treba mi i putanja do slike
+  @Input() sastojak: Sastojak;
   @Output() cekiraniSastojak: EventEmitter<Event> = new EventEmitter();
 
   constructor(private store: Store<GlobalnoStanjeAplikacije>) { }
@@ -18,9 +18,8 @@ export class SastojakComponent implements OnInit {
   ngOnInit() {
   }
 
-  //sad, mozda mi i ne treba ovo ovde...
   selektujSastojak(event: Event) {
-    this.cekiraniSastojak.emit(event);//i ovo kao sad radi, samo da ga povezem u roditeljskoj komponenti
+    this.cekiraniSastojak.emit(event);
   }
 
   emitujCekiraniSastojak(sastojak: Sastojak) {
