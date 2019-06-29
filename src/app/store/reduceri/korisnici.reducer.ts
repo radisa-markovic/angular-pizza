@@ -20,7 +20,6 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
 
     case akcijeKorisnici.REGISTRUJ_KORISNIKA:
       {
-        console.log(stanje);
         let { payload } = (akcija as akcijeKorisnici.RegistrujKorisnika);
         return adapter.addOne(payload, stanje);
       }

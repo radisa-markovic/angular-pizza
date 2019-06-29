@@ -13,8 +13,6 @@ const pocetnoStanje: UI = {
   korisnickoIme: ''
 };
 
-//sad da se nekako neke komponente pretplate na ovo stanje (neki dependency injection sigurno, al selekcija...)
-//moracu da pogledam opet ono citanje iz komponenti, a i da ubacim svakako u header.component.ts nesto...
 export function uiReducer(stanje = pocetnoStanje, akcija: Action): UI {
   switch (akcija.type) {
     case akcijeKorisnici.PRIJAVI_KORISNIKA:

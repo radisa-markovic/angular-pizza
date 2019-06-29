@@ -22,7 +22,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { KorisniciEfekti } from './store/efekti/korisnici.efekti';
 import { SastojciEfekti } from './store/efekti/sastojci.efekti';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component'
+import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component';
+import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proi
     PocetnaStranicaComponent,
     NapraviNalogComponent,
     PrijaviSeComponent,
-    NaruciProizvodComponent
+    NaruciProizvodComponent,
+    NarudzbinaComponent
   ],
   imports: [
     BrowserModule,

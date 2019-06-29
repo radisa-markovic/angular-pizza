@@ -5,6 +5,7 @@ import { PocetnaStranicaComponent } from './komponente/pocetnaStranica/pocetna-s
 import { NapraviNalogComponent } from './komponente/napraviNalog/napravi-nalog.component';
 import { PrijaviSeComponent } from './komponente/prijaviSe/prijavi-se.component';
 import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component';
+import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaStranicaComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'naruciProizvod/pica', component: PicaComponent },
   { path: 'napraviNalog', component: NapraviNalogComponent },
   { path: 'prijaviSe', component: PrijaviSeComponent },
+  { path: 'trenutnaPorudzbina', component: NarudzbinaComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
