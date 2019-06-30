@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   odjaviKorisnika(event: Event): void {
     event.preventDefault();
     this.store.dispatch(new akcijeKorisnika.OdjaviKorisnika());
-    this.router.navigate(["/"]); //nek ide na pocetnu npr
+    this.router.navigate(["/"]);
   }
 
 }

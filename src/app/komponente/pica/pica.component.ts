@@ -85,7 +85,6 @@ export class PicaComponent implements OnInit {
   }
 
   potvrdiPicu(): void {
-    alert(`redirekcija, upis u bazu, i posle pregled porudzbine u onoj kartici, odakle se ovo iz baze vadi`);
     let novaPica: Pica = {
       id: uuid.v4(), 
       brojKomada: this.brojKomada,
@@ -96,9 +95,10 @@ export class PicaComponent implements OnInit {
     let korisnickoIme: string;
     this.store.select('uiStanje').subscribe(uiInfo => korisnickoIme = uiInfo.korisnickoIme);
     
-    console.log(korisnickoIme);
-
+    //ovo treba da se istovremeno upise u bazu za narudzbine, a i kod korisnika jedan patch ide
     this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));
+    alert(`Narudžbina je uspešno dodata`);
+    this.router.navigate(["/naruciProizvod"]);
   }
 
   vratiSeNaPocetnuStranicu(): void {

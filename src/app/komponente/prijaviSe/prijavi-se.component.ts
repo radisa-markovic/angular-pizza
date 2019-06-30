@@ -3,11 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Korisnik } from '../../modeli-podataka/Korisnik.model';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
 import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
-import { Dictionary } from '@ngrx/entity';
 
 @Component({
   selector: 'app-prijavi-se',
@@ -19,7 +16,7 @@ export class PrijaviSeComponent implements OnInit {
   korisnickoIme: string;
   lozinka: string;
 
-  korisnici: Object; //jer hocu hasOwnProperty, posto ngrx ima cele 2 prosto prosirene recenice o ovome...
+  korisnici: Object;
 
   constructor(private formBuilder: FormBuilder,
     private store: Store<GlobalnoStanjeAplikacije>,
@@ -50,7 +47,7 @@ export class PrijaviSeComponent implements OnInit {
     lozinkaJeIspravna ? alert(`Ispravna je lozinka`) : alert(`Neispravna lozinka`);
 
     if (korisnickoImeJeIspravno && lozinkaJeIspravna) {
-      this.store.dispatch(new akcijeKorisnika.PrijaviKorisnika(this.korisnici[korisnickoIme])); //e sad, moram da izvucem korisnika
+      this.store.dispatch(new akcijeKorisnika.PrijaviKorisnika(this.korisnici[korisnickoIme]));
       this.router.navigate(["/naruciProizvod"]);
     }
   }
@@ -69,7 +66,7 @@ export class PrijaviSeComponent implements OnInit {
     this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => sviKorisnici = korisnici);
 
     if (sviKorisnici.hasOwnProperty(korisnickoIme)) {
-      let korisnik = sviKorisnici[korisnickoIme];//internet kaze da ovako treba
+      let korisnik = sviKorisnici[korisnickoIme];
       return (korisnik.lozinka === lozinka);
     }
     else {

@@ -20,6 +20,15 @@ export class KorisniciService {
       );
   }
 
+  dodajNarudzbinu(idNarudzbine: string): Observable<Korisnik> //nek bude da ovako treba 
+  {
+    //samo trebam da dodam element korisniku...
+    let novaNarudzbina = {
+
+    };
+    return this.httpKlijent.patch<Korisnik>(`${this.putanjaDoKorisnika}/`);
+  }
+
   vratiKorisnike(): Observable<Korisnik[]> {
     return this.httpKlijent.get<Korisnik[]>(this.putanjaDoKorisnika);
   }

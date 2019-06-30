@@ -24,6 +24,7 @@ import { SastojciEfekti } from './store/efekti/sastojci.efekti';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component';
 import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component'
+import { NarudzbinaEfekti } from './store/efekti/narudzbina.efekti';
 
 @NgModule({
   declarations: [
@@ -44,12 +45,12 @@ import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.componen
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      korisnici: korisniciReducer, //svako mora neki svoj reducer da dobije mislim, zavisi...
+      korisnici: korisniciReducer,
       uiStanje: uiReducer,
       narudzbina: reducerNarudzbine,
       sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem
     }),
-    EffectsModule.forRoot([KorisniciEfekti, SastojciEfekti]), //ovde stimujem efekte valjda
+    EffectsModule.forRoot([KorisniciEfekti, SastojciEfekti, NarudzbinaEfekti]), //ovde stimujem efekte valjda
     StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [],

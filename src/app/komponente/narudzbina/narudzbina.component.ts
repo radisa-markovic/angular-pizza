@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./narudzbina.component.css']
 })
 export class NarudzbinaComponent implements OnInit {
-
+  //ovde bi trebao da uhvatim sve narudzbine jednog korisnika i da ih iscrtam
   constructor() { }
 
   ngOnInit() {
