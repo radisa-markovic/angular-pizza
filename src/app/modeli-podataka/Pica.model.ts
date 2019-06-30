@@ -1,4 +1,7 @@
 export interface Pica {
   id: number,
-  osnovnaCena: number
+  brojKomada: number,
+  osnovnaCena: number,
+  ukupnaCena: number,
+  sastojci: string[] //identifikatori sastojaka
 }

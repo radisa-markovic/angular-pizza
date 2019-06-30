@@ -7,7 +7,7 @@ export const DODAJ_NOVU_PICU: string = '[Pica] Dodaj novu picu';
 
 export class DodajNovuPicu implements Action {
   readonly type = DODAJ_NOVU_PICU;
-  constructor(public novaPica: Pica) { };
+  constructor(public korisnickoIme: string, public novaPica: Pica) { };
 }
 
 

@@ -4,5 +4,5 @@ export interface Korisnik {
   prezime: string,
   korisnickoIme: string,
   lozinka: string,
-  narudzbine: string[];
+  narudzbine: number[];//valjda je ovo ispravan tip za identifikatore narudzbina
 }

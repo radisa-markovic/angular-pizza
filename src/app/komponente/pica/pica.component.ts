@@ -8,6 +8,8 @@ import { Store } from '@ngrx/store';
 import * as picaAkcije from '../../store/akcije/pica.akcije';
 import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
 import * as proizvodAkcije from '../../store/akcije/proizvod.akcije';
+import * as uuid from 'uuid';
+import { Pica } from 'src/app/modeli-podataka/Pica.model';
 
 @Component({
   selector: 'app-pica',
@@ -21,7 +23,7 @@ export class PicaComponent implements OnInit {
   ukupnaCena: number;
   sastojci: Sastojak[];
   
-  cekiraniSastojci: number[] = [];
+  cekiraniSastojci: string[] = []; // ovde ubacujem identifikatore koji su brojevi, mozda bolje string da bude
   constructor(private store: Store<GlobalnoStanjeAplikacije>,
               private router: Router) { }
 
@@ -32,7 +34,7 @@ export class PicaComponent implements OnInit {
     this.cenaOdSastojaka = 0;
     this.ukupnaCena = this.preracunajUkupnuCenu();
 
-    let selekcija = this.store.select(sastojakSelektor.selectAll); //ovde dobijam sastojke, pa ih iscrtavam
+    let selekcija = this.store.select(sastojakSelektor.selectAll);
     selekcija.subscribe(ucitaniSastojci => {
       this.sastojci = ucitaniSastojci
     });
@@ -69,28 +71,37 @@ export class PicaComponent implements OnInit {
     let cekiraniSastojak: HTMLInputElement = <HTMLInputElement>event.target;
     if(cekiraniSastojak.checked)
     {
-      this.cekiraniSastojci.push(sastojak.id);
+      this.cekiraniSastojci.push(sastojak.naziv);
       this.cenaOdSastojaka += sastojak.cena;
       this.ukupnaCena = this.preracunajUkupnuCenu();
     }
     else
     {
-      this.cekiraniSastojci = this.cekiraniSastojci.filter(identifikatori => identifikatori !== sastojak.id);
+      this.cekiraniSastojci = this.cekiraniSastojci.filter(identifikatori => identifikatori !== sastojak.naziv);
       this.cenaOdSastojaka -= sastojak.cena;
       this.ukupnaCena = this.preracunajUkupnuCenu();
     }
     console.log(this.cekiraniSastojci);
   }
 
-  potvrdiPicu() {
+  potvrdiPicu(): void {
     alert(`redirekcija, upis u bazu, i posle pregled porudzbine u onoj kartici, odakle se ovo iz baze vadi`);
-    //ako sam danas pohvatao nesto, to je da trebam da iz baze selektujem cekirane sastojke nekako
-    //pa da prosledim u ovaj mrtvi proizvod, tj u narudzbinu... nego poznavam
-    //this.store.dispatch(new proizvodAkcije.DodajNoviProizvod()); //najruznija akcija koju sam napisao do sada
+    let novaPica: Pica = {
+      id: uuid.v4(), 
+      brojKomada: this.brojKomada,
+      osnovnaCena: this.osnovnaCena,
+      ukupnaCena: this.ukupnaCena,
+      sastojci: this.cekiraniSastojci
+    };
+    let korisnickoIme: string;
+    this.store.select('uiStanje').subscribe(uiInfo => korisnickoIme = uiInfo.korisnickoIme);
+    
+    console.log(korisnickoIme);
+
+    this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));
   }
 
-  vratiSeNaPocetnuStranicu() {
-    alert(`Vracam se na narudzbine`);
+  vratiSeNaPocetnuStranicu(): void {
     this.router.navigate(["/naruciProizvod"]);
   }
 }

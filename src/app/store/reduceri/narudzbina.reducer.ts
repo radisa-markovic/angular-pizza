@@ -1,6 +1,7 @@
 import * as akcijePica from '../akcije/pica.akcije';
 import * as akcijeSastojci from '../akcije/sastojci.akcije';
 import * as akcijeProizvodi from '../akcije/proizvod.akcije';
+import * as uuid from 'uuid';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Action } from '@ngrx/store';
 
@@ -9,8 +10,8 @@ import { Action } from '@ngrx/store';
 export interface Narudzbina {
   id: number,
   naziv: string,
+  brojKomada: number,
   cena: number,
-  proizvod: string,
   sastojci: string[] //identifikator dodatih sastojaka
 }
 
@@ -25,9 +26,17 @@ const pocetnoStanjeNarudzbina: NarudzbineEntiteti = adapterNarudzbina.getInitial
 
 export function reducerNarudzbine(stanje = pocetnoStanjeNarudzbina, akcija: Action): NarudzbineEntiteti {
   switch (akcija.type) {
-    case akcijeProizvodi.DODAJ_NOVI_PROIZVOD: //ovde nabijem element koji dodam iz one pice mrtve
+    case akcijePica.DODAJ_NOVU_PICU:
       {
-        return //stanje;
+        const { novaPica } = (akcija as akcijePica.DodajNovuPicu);
+        let novaNarudzbina: Narudzbina = {
+          id: novaPica.id,
+          naziv: 'Pica',
+          brojKomada: novaPica.brojKomada,
+          cena: novaPica.ukupnaCena,
+          sastojci: novaPica.sastojci
+        };
+        return adapterNarudzbina.addOne(novaNarudzbina, stanje);
       }
 
     default:
