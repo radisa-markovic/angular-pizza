@@ -1,12 +1,10 @@
 import { Korisnik } from './modeli-podataka/Korisnik.model';
 import { Narudzbina } from './modeli-podataka/Narudzbina.model';
 import { UI } from './store/reduceri/ui.reducer';
-//ako imam jos nesto da dodam ovde, neki jos atribut stanja, ovde bih ga dodao
 
-//ne znam gde pice da ubacim...
 export interface GlobalnoStanjeAplikacije {
   korisnici: Korisnik[],
-  UI: UI,
+  uiStanje: UI,
   narudzbine: Narudzbina[],
   nekoJePrijavljen: boolean
 }

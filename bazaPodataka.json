@@ -7,7 +7,9 @@
       "korisnickoIme": "radeCU",
       "lozinka": "mnogoSamGlup",
       "narudzbine": [
-        "9984f456-1bf8-47f6-a665-98b60066ed89"
+        "9984f456-1bf8-47f6-a665-98b60066ed89",
+        "2ca91b85-8de3-4242-83e8-ab2f0ead1ba3",
+        "b23c84fb-2909-440f-8ad5-a58074ef84bd"
       ]
     },
     {
@@ -40,6 +42,27 @@
       "cena": 2920,
       "sastojci": [
         "Sir",
+        "Ljuti sos"
+      ]
+    },
+    {
+      "id": "2ca91b85-8de3-4242-83e8-ab2f0ead1ba3",
+      "naziv": "Pica",
+      "brojKomada": 1,
+      "cena": 500,
+      "sastojci": [
+        "Ljuti sos"
+      ]
+    },
+    {
+      "id": "b23c84fb-2909-440f-8ad5-a58074ef84bd",
+      "naziv": "Pica",
+      "brojKomada": 4,
+      "cena": 3960,
+      "sastojci": [
+        "Šampinjoni",
+        "Kulen",
+        "Šunka",
         "Ljuti sos"
       ]
     }

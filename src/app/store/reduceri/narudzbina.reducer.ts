@@ -3,7 +3,7 @@ import * as akcijeSastojci from '../akcije/sastojci.akcije';
 import * as akcijeNarudzbine from '../akcije/narudzbina.akcije';
 import * as uuid from 'uuid';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Action } from '@ngrx/store';
+import { Action, createFeatureSelector } from '@ngrx/store';
 import { Narudzbina } from '../../modeli-podataka/Narudzbina.model';
 
 export interface NarudzbineEntiteti extends EntityState<Narudzbina> { }
@@ -41,3 +41,11 @@ export function reducerNarudzbine(stanje = pocetnoStanjeNarudzbina, akcija: Acti
       }
   }
 }
+
+export const vratiSveNarudzbineUStanju = createFeatureSelector<NarudzbineEntiteti>('narudzbina');
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal
+} = adapterNarudzbina.getSelectors(vratiSveNarudzbineUStanju);

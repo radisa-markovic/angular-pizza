@@ -1,3 +1,6 @@
 <ng-container>
   <h2>Moje narudžbine:</h2>
+  <app-proizvod *ngFor="let proizvod of narudzbine" [narudzbina]="proizvod">
+
+  </app-proizvod>
 </ng-container>

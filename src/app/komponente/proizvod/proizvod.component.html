@@ -1,0 +1,20 @@
+<div class="col-sm-9" style="width: 19rem;">
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">{{narudzbina.naziv}}</span>
+    </div>
+    <div class="card-body">
+      <span class="card-title">Broj komada: {{narudzbina.brojKomada}}</span>
+    </div>
+    <div class="card-body">Sastojci:
+      <ul>
+        <li *ngFor="let sastojak of narudzbina.sastojci">
+          {{narudzbina.sastojci}}
+        </li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-title">Ukupna cena: {{narudzbina.cena}} RSD</span>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component';
 import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component'
 import { NarudzbinaEfekti } from './store/efekti/narudzbina.efekti';
+import { ProizvodComponent } from './komponente/proizvod/proizvod.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { NarudzbinaEfekti } from './store/efekti/narudzbina.efekti';
     NapraviNalogComponent,
     PrijaviSeComponent,
     NaruciProizvodComponent,
-    NarudzbinaComponent
+    NarudzbinaComponent,
+    ProizvodComponent
   ],
   imports: [
     BrowserModule,
