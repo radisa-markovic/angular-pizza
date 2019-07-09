@@ -4,13 +4,15 @@ import { Action } from '@ngrx/store';
 export interface UI {
   nekoJePrijavljen: boolean,
   idPrijavljenogKorisnika: string,
-  korisnickoIme: string
+  korisnickoIme: string,
+  narudzbineKorisnika: string[]
 }
 
 const pocetnoStanje: UI = {
   nekoJePrijavljen: false,
   idPrijavljenogKorisnika: '',
-  korisnickoIme: ''
+  korisnickoIme: '',
+  narudzbineKorisnika: []
 };
 
 export function uiReducer(stanje = pocetnoStanje, akcija: Action): UI {
@@ -22,7 +24,8 @@ export function uiReducer(stanje = pocetnoStanje, akcija: Action): UI {
           ...stanje,
           nekoJePrijavljen: true,
           idPrijavljenogKorisnika: korisnik.id,
-          korisnickoIme: korisnik.korisnickoIme
+          korisnickoIme: korisnik.korisnickoIme,
+          narudzbineKorisnika: korisnik.narudzbine
         };
       }
     case akcijeKorisnici.ODJAVI_KORISNIKA:

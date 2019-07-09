@@ -44,7 +44,8 @@ export class PrijaviSeComponent implements OnInit {
     else
       alert(`Nepostojece korisnicko ime "${korisnickoIme}"`);
 
-    lozinkaJeIspravna ? alert(`Ispravna je lozinka`) : alert(`Neispravna lozinka`);
+    if(!lozinkaJeIspravna)
+      alert(`Neispravna lozinka`);
 
     if (korisnickoImeJeIspravno && lozinkaJeIspravna) {
       this.store.dispatch(new akcijeKorisnika.PrijaviKorisnika(this.korisnici[korisnickoIme]));
@@ -58,15 +59,13 @@ export class PrijaviSeComponent implements OnInit {
       sviKorisnici = korisnici;
     });
 
-    console.log(sviKorisnici); //moram da menjam logiku stvari za korisnicko ime
-
     return (sviKorisnici.hasOwnProperty(korisnickoIme));//true je ako sam uboo korisnicko ime
   }
 
   proveriLozinku(korisnickoIme: string, lozinka: string): boolean {
     let sviKorisnici: any;
     this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => sviKorisnici = korisnici);
-    console.log(sviKorisnici);
+    
     if (sviKorisnici.hasOwnProperty(korisnickoIme)) {
       let korisnik = sviKorisnici[korisnickoIme];
       return (korisnik.lozinka === lozinka);
