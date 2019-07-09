@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Narudzbina } from 'src/app/modeli-podataka/Narudzbina.model';
 
 @Component({
   selector: 'app-narudzbina',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./narudzbina.component.css']
 })
 export class NarudzbinaComponent implements OnInit {
-  //ovde bi trebao da uhvatim sve narudzbine jednog korisnika i da ih iscrtam
+  narudzbine: Narudzbina[];
+
   constructor() { }
 
   ngOnInit() {

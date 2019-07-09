@@ -1,5 +1,5 @@
 import { Korisnik } from './modeli-podataka/Korisnik.model';
-import { Narudzbina } from './store/reduceri/Narudzbina.reducer';
+import { Narudzbina } from './modeli-podataka/Narudzbina.model';
 import { UI } from './store/reduceri/ui.reducer';
 //ako imam jos nesto da dodam ovde, neki jos atribut stanja, ovde bih ga dodao
 

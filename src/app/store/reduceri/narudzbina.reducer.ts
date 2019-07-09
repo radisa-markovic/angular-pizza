@@ -1,20 +1,10 @@
 import * as akcijePica from '../akcije/pica.akcije';
 import * as akcijeSastojci from '../akcije/sastojci.akcije';
-import * as akcijeProizvodi from '../akcije/proizvod.akcije';
+import * as akcijeNarudzbine from '../akcije/narudzbina.akcije';
 import * as uuid from 'uuid';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Action } from '@ngrx/store';
-
-
-
-export interface Narudzbina {
-  id: number,
-  naziv: string,
-  brojKomada: number,
-  cena: number,
-  sastojci: string[] //identifikator dodatih sastojaka
-}
-
+import { Narudzbina } from '../../modeli-podataka/Narudzbina.model';
 
 export interface NarudzbineEntiteti extends EntityState<Narudzbina> { }
 
@@ -38,6 +28,12 @@ export function reducerNarudzbine(stanje = pocetnoStanjeNarudzbina, akcija: Acti
         };
         return adapterNarudzbina.addOne(novaNarudzbina, stanje);
       }
+
+    case akcijeNarudzbine.UCITAJ_SVE_NARUDZBINE_USPEH: 
+    {
+      const { narudzbine } = (akcija as akcijeNarudzbine.UcitajSveNarudzbineUspeh);
+      return adapterNarudzbina.addAll(narudzbine, stanje);
+    } 
 
     default:
       {

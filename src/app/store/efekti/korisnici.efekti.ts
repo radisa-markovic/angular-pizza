@@ -5,7 +5,7 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import * as akcijeKorisnici from '../akcije/korisnici.akcije';
 import * as korisniciServis from '../../servisi/korisnici.service';
 import * as akcijePica from '../akcije/pica.akcije'
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class KorisniciEfekti {
@@ -17,10 +17,10 @@ export class KorisniciEfekti {
     switchMap((akcija) => this.korisniciServis.upisiKorisnikaUBazu(akcija.payload))
   );
 
-  @Effect()
+  @Effect({dispatch: false})
   dodajNarudzbinu$ = this.akcija$.pipe(
-    ofType<akcijePica.DodajNovuPicu>(akcijePica.DODAJ_NOVU_PICU),
-    switchMap((akcija) => this.korisniciServis)
+    ofType<akcijePica.UpisiPicuKodKorisnikaUBazu>(akcijePica.UPISI_PICU_KOD_KORISNIKA_U_BAZU),
+    switchMap((akcija) => this.korisniciServis.dodajNarudzbinu(akcija.novaPica.id, akcija.idKorisnika))
   );
 
   @Effect()

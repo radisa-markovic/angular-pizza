@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Narudzbina } from '../store/reduceri/narudzbina.reducer';
+import { Narudzbina } from '../modeli-podataka/Narudzbina.model';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -18,12 +18,7 @@ export class NarudzbinaService {
     );
   }
 
-  //koja je fora sa ovim: ja sad imam korisnika kao entitet, koji u sebi ima niz identifikatora ovih narudzbina
-  //sad, dal da vracam sve pa onda da filtriram (verovatno nije pametno), il nekako da posaljem akciju...
-  //...klikom na narudzbine koja ce da iz Store-a da izvuce trazene identifikatore, pa da ih nacrta
-  //...morao bih da vidim to nekako, al to cu sutra, nemam koncentracije sad, a u medjuvremenu mogu da
-  //...se pozabavim dizajnom
-  vratiNarudzbineKorisnika(idKorisnika: string): Observable<Narudzbina[]> {
-    return;
+  vratiNarudzbine(): Observable<Narudzbina[]> {
+    return this.httpKlijent.get<Narudzbina[]>(this.putanjaDoNarudzbina);
   }
 }

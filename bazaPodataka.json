@@ -6,68 +6,41 @@
       "prezime": "Marković",
       "korisnickoIme": "radeCU",
       "lozinka": "mnogoSamGlup",
-      "narudzbine": []
+      "narudzbine": [
+        "9984f456-1bf8-47f6-a665-98b60066ed89"
+      ]
+    },
+    {
+      "id": "5c4f5a87-3b8f-4e1d-99e2-874053f30a81",
+      "ime": "Milovan",
+      "prezime": "Markovic",
+      "korisnickoIme": "dedaMilovan",
+      "lozinka": "milovan",
+      "narudzbine": [
+        "4df3ae9d-cf8d-4703-ba8b-e755957c97e4"
+      ]
     }
   ],
   "narudzbine": [
     {
-      "id": "c6903a39-bd6f-4fbb-a668-ec84b0760093",
+      "id": "9984f456-1bf8-47f6-a665-98b60066ed89",
       "naziv": "Pica",
       "brojKomada": 1,
-      "cena": 820,
+      "cena": 830,
       "sastojci": [
-        "Pršuta",
-        "Sir"
-      ]
-    },
-    {
-      "id": "92d4bc57-4772-43ce-a7a2-8bf0d35195a8",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 800,
-      "sastojci": [
-        "Pršuta",
-        "Šunka",
-        "Ljuti sos"
-      ]
-    },
-    {
-      "id": "fed2ece9-f4b4-4d9e-b548-4be23bba0aa3",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 440,
-      "sastojci": [
-        "Šampinjoni"
-      ]
-    },
-    {
-      "id": "625abd2c-8c34-4c06-9bb8-6a7bf5632505",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 630,
-      "sastojci": [
-        "Ljuti sos",
-        "Sir"
-      ]
-    },
-    {
-      "id": "32123ad8-95b8-464b-a4d9-cd677431ed70",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 630,
-      "sastojci": [
-        "Ljuti sos",
-        "Sir"
-      ]
-    },
-    {
-      "id": "5fcf9e6b-d7ce-466d-91af-d6fa41f4226c",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 580,
-      "sastojci": [
+        "Masline",
         "Šampinjoni",
         "Kulen"
+      ]
+    },
+    {
+      "id": "4df3ae9d-cf8d-4703-ba8b-e755957c97e4",
+      "naziv": "Pica",
+      "brojKomada": 4,
+      "cena": 2920,
+      "sastojci": [
+        "Sir",
+        "Ljuti sos"
       ]
     }
   ],

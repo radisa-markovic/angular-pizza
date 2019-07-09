@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { Korisnik } from '../modeli-podataka/Korisnik.model';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +20,13 @@ export class KorisniciService {
       );
   }
 
-  dodajNarudzbinu(idNarudzbine: string): Observable<Korisnik> //nek bude da ovako treba 
+  dodajNarudzbinu(idNarudzbine: string, idKorisnika: string): Observable<Korisnik> 
   {
-    //samo trebam da dodam element korisniku...
-    let novaNarudzbina = {
-
-    };
-    return this.httpKlijent.patch<Korisnik>(`${this.putanjaDoKorisnika}/`);
+    return this.httpKlijent.get<Korisnik>(`${this.putanjaDoKorisnika}/${idKorisnika}`).pipe(
+      tap(korisnik => console.log(korisnik.narudzbine)),
+      tap(korisnik => korisnik.narudzbine.push(idNarudzbine)),
+      switchMap(apdejtovaniKorisnik => this.httpKlijent.put<Korisnik>(`${this.putanjaDoKorisnika}/${idKorisnika}`, apdejtovaniKorisnik))
+    );
   }
 
   vratiKorisnike(): Observable<Korisnik[]> {

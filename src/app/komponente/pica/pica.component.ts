@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 
 import * as picaAkcije from '../../store/akcije/pica.akcije';
 import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
-import * as proizvodAkcije from '../../store/akcije/proizvod.akcije';
+import * as proizvodAkcije from '../../store/akcije/narudzbina.akcije';
 import * as uuid from 'uuid';
 import { Pica } from 'src/app/modeli-podataka/Pica.model';
 
@@ -92,11 +92,16 @@ export class PicaComponent implements OnInit {
       ukupnaCena: this.ukupnaCena,
       sastojci: this.cekiraniSastojci
     };
-    let korisnickoIme: string;
-    this.store.select('uiStanje').subscribe(uiInfo => korisnickoIme = uiInfo.korisnickoIme);
+    let idKorisnika: string, korisnickoIme: string;
+    this.store.select('uiStanje').subscribe(uiInfo => {
+      idKorisnika = uiInfo.idPrijavljenogKorisnika;
+      korisnickoIme = uiInfo.korisnickoIme;
+    });
     
-    //ovo treba da se istovremeno upise u bazu za narudzbine, a i kod korisnika jedan patch ide
-    this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));
+    console.log(korisnickoIme);
+
+    this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));//mozda da ovde napravim novu akciju koju ce da efekat slusa
+    this.store.dispatch(new picaAkcije.UpisiPicuKodKorisnikaUBazu(idKorisnika, novaPica));//ovo sad da napravim
     alert(`Narudžbina je uspešno dodata`);
     this.router.navigate(["/naruciProizvod"]);
   }

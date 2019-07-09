@@ -27,7 +27,7 @@ export function korisniciReducer(stanje = pocetnoStanje, akcija: Action): Korisn
       }
 
     case akcijePica.DODAJ_NOVU_PICU:
-      {//moram i u efektima da uradim jedan patch
+      {
         const { korisnickoIme, novaPica } = (akcija as akcijePica.DodajNovuPicu);
         const izmene: Update<Korisnik> = {
           id: korisnickoIme,

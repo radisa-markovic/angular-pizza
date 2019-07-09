@@ -1,5 +1,5 @@
 export interface Pica {
-  id: number,
+  id: string,
   brojKomada: number,
   osnovnaCena: number,
   ukupnaCena: number,
