@@ -6,6 +6,7 @@ import { UI } from '../reduceri/ui.reducer';
 import { Dictionary } from '@ngrx/entity';
 import { Korisnik } from 'src/app/modeli-podataka/Korisnik.model';
 import { Narudzbina } from 'src/app/modeli-podataka/Narudzbina.model';
+import { isObject } from 'util';
 
 export const vratiNarudzbinePrijavljenogKorisnika = () => {
   return createSelector(
@@ -13,9 +14,7 @@ export const vratiNarudzbinePrijavljenogKorisnika = () => {
     selectEntities,
     selektujNarudzbine,
       (UIStanje: UI, korisnici: Dictionary<Korisnik>, narudzbine: Dictionary<Narudzbina>) => {
-        console.log(korisnici);
-        console.log(UIStanje);
-        if(isEmpty(UIStanje))
+       if(isEmpty(UIStanje))
           return null;
         let rezultatSelektora: Narudzbina[] = [];
         korisnici[UIStanje.korisnickoIme].narudzbine.forEach(narudzbina => {
@@ -28,7 +27,7 @@ export const vratiNarudzbinePrijavljenogKorisnika = () => {
 export const selectUiState = (state: GlobalnoStanjeAplikacije) => state.uiStanje;
 
 
-import { isObject } from 'util';
+
 
 export function isEmpty(object: any): boolean {
   if (isObject(object)) {

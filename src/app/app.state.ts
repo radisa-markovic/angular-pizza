@@ -4,7 +4,7 @@ import { UI } from './store/reduceri/ui.reducer';
 
 export interface GlobalnoStanjeAplikacije {
   korisnici: Korisnik[],
-  uiStanje: UI,
+  uiStanje: UI, //mora da se poklapa sa onim u app-module, ili tako
   narudzbine: Narudzbina[],
   nekoJePrijavljen: boolean
 }

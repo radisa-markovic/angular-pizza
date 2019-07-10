@@ -100,8 +100,8 @@ export class PicaComponent implements OnInit {
     
     console.log(korisnickoIme);
 
-    this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));//mozda da ovde napravim novu akciju koju ce da efekat slusa
-    this.store.dispatch(new picaAkcije.UpisiPicuKodKorisnikaUBazu(idKorisnika, novaPica));//ovo sad da napravim
+    this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));
+    this.store.dispatch(new picaAkcije.UpisiPicuKodKorisnikaUBazu(idKorisnika, novaPica));
     alert(`Narudžbina je uspešno dodata`);
     this.router.navigate(["/naruciProizvod"]);
   }
