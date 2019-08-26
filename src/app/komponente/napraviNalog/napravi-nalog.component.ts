@@ -62,7 +62,7 @@ export class NapraviNalogComponent implements OnInit {
     }
     else
     {
-      alert(`Korisnicko ime je zauzeto, posle cu uraditi logiku i iscrtavanje`);
+      alert(`Korisnicko ime je zauzeto`);
     }
   }
 
