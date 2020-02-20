@@ -4,20 +4,31 @@
     <form [formGroup]="forma">
 
       <label for="inputKorisnickoIme">Korisničko ime:</label>
-      <input formControlName="korisnickoIme" type="text" id="inputKorisnickoIme" class="form-control">
+      <input formControlName="korisnickoIme" 
+             type="text" 
+             id="inputKorisnickoIme" 
+             class="form-control">
       <div class="alert alert-danger"
-        *ngIf="!forma.controls['korisnickoIme'].valid && forma.controls['korisnickoIme'].touched">
+           *ngIf="!forma.controls['korisnickoIme'].valid && forma.controls['korisnickoIme'].touched">
         Korisnicko ime mora biti duzine 4
       </div>
 
       <label for="inputLozinka">Lozinka:</label>
-      <input formControlName="lozinka" type="password" id="inputLozinka" class="form-control">
-      <div class="alert alert-danger" *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
+      <input formControlName="lozinka" 
+             type="password" 
+             id="inputLozinka" 
+             class="form-control">
+      <div class="alert alert-danger" 
+           *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
         Lozinka mora biti duzine 7
       </div>
 
-      <button type="button" class="btn btn-primary" [disabled]="!forma.valid"
-        (click)="prijaviKorisnika()">Potvrdi</button>
+      <button type="button" 
+              class="btn btn-primary" 
+              [disabled]="!forma.valid"
+              (click)="prijaviKorisnika()">
+              Potvrdi
+      </button>
     </form>
   </div>
 </div>

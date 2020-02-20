@@ -3,31 +3,51 @@
   <form [formGroup]="forma">
     <div class="form-group">
       <label for="inputIme">Ime:</label>
-      <input formControlName="ime" type="text" id="inputIme" class="form-control">
-      <div class="alert alert-danger" *ngIf="!forma.controls['ime'].valid && forma.controls['ime'].touched">
+      <input formControlName="ime" 
+             type="text" 
+             id="inputIme" 
+             class="form-control">
+      <div class="alert alert-danger" 
+           *ngIf="!forma.controls['ime'].valid && forma.controls['ime'].touched">
         {{ porukaOGresci }}
       </div>
 
       <label for="inputPrezime">Prezime:</label>
-      <input formControlName="prezime" type="text" id="inputPrezime" class="form-control">
-      <div class="alert alert-danger" *ngIf="!forma.controls['prezime'].valid && forma.controls['prezime'].touched">
+      <input formControlName="prezime" 
+             type="text" 
+             id="inputPrezime" 
+             class="form-control">
+      <div class="alert alert-danger" 
+           *ngIf="!forma.controls['prezime'].valid && forma.controls['prezime'].touched">
         {{ porukaOGresci }}
       </div>
 
       <label for="inputKorisnickoIme">Korisničko ime:</label>
-      <input formControlName="korisnickoIme" type="text" id="inputKorisnickoIme" class="form-control">
+      <input formControlName="korisnickoIme" 
+             type="text" 
+             id="inputKorisnickoIme" 
+             class="form-control">
       <div class="alert alert-danger"
         *ngIf="!forma.controls['korisnickoIme'].valid && forma.controls['korisnickoIme'].touched">
         Korisničko ime mora imati najmanje 4 karaktera
       </div>
 
       <label for="inputLozinka">Lozinka:</label>
-      <input formControlName="lozinka" type="password" id="inputLozinka" class="form-control">
-      <div class="alert alert-danger" *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
+      <input formControlName="lozinka" 
+             type="password" 
+             id="inputLozinka" 
+             class="form-control">
+      <div class="alert alert-danger" 
+           *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
         Lozinka mora imati najmanje 7 karaktera
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary" [disabled]="!forma.valid" (click)="registrujKorisnika()">Potvrdi</button>
+    <button type="button" 
+            class="btn btn-primary" 
+            [disabled]="!forma.valid" 
+            (click)="registrujKorisnika()">
+            Potvrdi
+    </button>
   </form>
 </div>
