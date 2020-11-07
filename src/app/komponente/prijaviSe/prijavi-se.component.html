@@ -9,8 +9,12 @@
              id="inputKorisnickoIme" 
              class="form-control">
       <div class="alert alert-danger"
-           *ngIf="!forma.controls['korisnickoIme'].valid && forma.controls['korisnickoIme'].touched">
-        Korisnicko ime mora biti duzine 4
+           *ngIf="kontrolaNijeValidna('korisnickoIme')">
+        Korisnicko ime mora biti duzine {{this.minimalnaDuzinaKorisnickogImena}}
+      </div>
+      <div class="alert alert-danger"
+           *ngIf="this.korisnickoImeJePogresno">
+        Korisnicko ime je pogresno
       </div>
 
       <label for="inputLozinka">Lozinka:</label>
@@ -19,8 +23,12 @@
              id="inputLozinka" 
              class="form-control">
       <div class="alert alert-danger" 
-           *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
-        Lozinka mora biti duzine 7
+           *ngIf="kontrolaNijeValidna('lozinka')">
+        Lozinka mora biti duzine {{this.minimalnaDuzinaLozinke}}
+      </div>
+      <div class="alert alert-danger"
+           *ngIf="this.lozinkaJePogresna">
+        Lozinka je pogresna
       </div>
 
       <button type="button" 

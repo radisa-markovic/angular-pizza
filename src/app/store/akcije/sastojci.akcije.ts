@@ -1,5 +1,13 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { Sastojak } from '../../modeli-podataka/Sastojak.model';
+
+export enum AkcijeNadSastojcima
+{
+  UCITAJ_SASTOJKE = "[Akcije nad sastojcima] Ucitaj sastojke",
+  UCITAJ_SASTOJKE_USPEH = "[Akcije nad sastojcima] Ucitaj sastojke uspeh",
+  DODAJ_SASTOJAK = "[Akcije nad sastojcima] Dodaj sastojak",
+  UKLONI_SASTOJAK = "[Akcije nad sastojcima] Ukloni sastojak"
+};
 
 export const UCITAJ_SASTOJKE: string = '[Sastojak] Ucitaj sastojke';
 export const UCITAJ_SASTOJKE_USPEH: string = '[Sastojak] Ucitaj sastojke uspeh';
@@ -27,3 +35,11 @@ export class UkloniSastojak implements Action {
   constructor(public sastojak: Sastojak) { };
   //mozda je pametnije da se samo posalje id, al to moze i posle da se menja
 }
+
+export const A_UcitajSastojke = createAction(AkcijeNadSastojcima.UCITAJ_SASTOJKE);
+export const A_UcitajSastojkeUspeh = createAction(AkcijeNadSastojcima.UCITAJ_SASTOJKE_USPEH, 
+                                                  props<{sastojci: Sastojak[]}>());
+export const A_DodajSastojak = createAction(AkcijeNadSastojcima.DODAJ_SASTOJAK, 
+                                            props<{noviSastojak: Sastojak}>());
+export const A_UkloniSastojak = createAction(UKLONI_SASTOJAK, 
+                                             props<{sastojak: Sastojak}>());

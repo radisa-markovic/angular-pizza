@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Korisnik } from '../modeli-podataka/Korisnik.model';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 
@@ -13,11 +13,18 @@ export class KorisniciService {
 
   constructor(private httpKlijent: HttpClient) { }
 
-  upisiKorisnikaUBazu(noviKorisnik: Korisnik): Observable<Korisnik> {
-    return this.httpKlijent.post<Korisnik>(this.putanjaDoKorisnika, noviKorisnik)
-      .pipe(
-        catchError((greska: any) => Observable.throw(greska))
-      );
+  //zbog povratnog tipa ovde zeza efekat ponekad
+  upisiKorisnikaUBazu(noviKorisnik: Korisnik)
+  {
+    console.log(noviKorisnik);
+    //moram da subscribe odradim na post kako bi radilo, jeste ruzno, al ono, ako radi-radi za sada
+    this.httpKlijent.post<Korisnik>(`${this.putanjaDoKorisnika}`, noviKorisnik).subscribe();//da vidim dal radi
+  }
+
+  //moram da prati kakve podatke vraca json server
+  vratiKorisnika(korisnickoIme: string): Observable<Korisnik[]>
+  {
+    return this.httpKlijent.get<Korisnik[]>(`${this.putanjaDoKorisnika}/?korisnickoIme=${korisnickoIme}`);
   }
 
   dodajNarudzbinu(idNarudzbine: string, idKorisnika: string): Observable<Korisnik> 

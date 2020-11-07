@@ -4,10 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
-import { korisniciReducer } from './store/reduceri/korisnici.reducer'
+import { reducer } from './store/reduceri/korisnici.reducer'
 import { reducerNarudzbine } from './store/reduceri/narudzbina.reducer';
 import { reducerSastojaka } from './store/reduceri/sastojci.reducer';
-import { uiReducer } from './store/reduceri/ui.reducer';
+import  uiReducer from './store/reduceri/ui.reducer'; //default i Petkovic
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,7 +47,7 @@ import { ProizvodComponent } from './komponente/proizvod/proizvod.component';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      korisnici: korisniciReducer,
+      korisnici: reducer,
       uiStanje: uiReducer,
       narudzbina: reducerNarudzbine,
       sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem

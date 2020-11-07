@@ -1,47 +1,56 @@
 <div class="col-sm-6 offset-sm-3 text-center">
   <h2>Napravi nalog: </h2>
   <form [formGroup]="forma">
-    <div class="form-group">
-      <label for="inputIme">Ime:</label>
-      <input formControlName="ime" 
-             type="text" 
-             id="inputIme" 
-             class="form-control">
+    
+      <label>Ime:
+        <input formControlName="ime" 
+               type="text" 
+               id="inputIme" 
+               class="form-control">
+      </label>       
       <div class="alert alert-danger" 
-           *ngIf="!forma.controls['ime'].valid && forma.controls['ime'].touched">
+           *ngIf="kontrolaNijeValidna('ime')">
         {{ porukaOGresci }}
       </div>
 
-      <label for="inputPrezime">Prezime:</label>
-      <input formControlName="prezime" 
-             type="text" 
-             id="inputPrezime" 
-             class="form-control">
+      <label>Prezime:
+        <input formControlName="prezime" 
+               type="text" 
+               id="inputPrezime" 
+               class="form-control">
+      </label>       
       <div class="alert alert-danger" 
-           *ngIf="!forma.controls['prezime'].valid && forma.controls['prezime'].touched">
+           *ngIf="kontrolaNijeValidna('prezime')">
         {{ porukaOGresci }}
       </div>
 
-      <label for="inputKorisnickoIme">Korisničko ime:</label>
+      <div class="alert alert-danger" 
+          *ngIf="this.korisnickoImeJeZauzeto">
+          {{ "Korisnicko ime je zauzeto" }}
+      </div>
+
+      <label>Korisničko ime:
       <input formControlName="korisnickoIme" 
              type="text" 
              id="inputKorisnickoIme" 
              class="form-control">
+      </label>
       <div class="alert alert-danger"
-        *ngIf="!forma.controls['korisnickoIme'].valid && forma.controls['korisnickoIme'].touched">
-        Korisničko ime mora imati najmanje 4 karaktera
+           *ngIf="kontrolaNijeValidna('korisnickoIme')">
+          Korisničko ime mora imati najmanje {{this.minimalnaDuzinaKorisnickoIme}} karaktera
       </div>
 
-      <label for="inputLozinka">Lozinka:</label>
-      <input formControlName="lozinka" 
-             type="password" 
-             id="inputLozinka" 
-             class="form-control">
+      <label for="inputLozinka">Lozinka:
+        <input formControlName="lozinka" 
+              type="password" 
+              id="inputLozinka" 
+              class="form-control">
+      </label>
       <div class="alert alert-danger" 
-           *ngIf="!forma.controls['lozinka'].valid && forma.controls['lozinka'].touched">
-        Lozinka mora imati najmanje 7 karaktera
+           *ngIf="kontrolaNijeValidna('lozinka')">
+          Lozinka mora imati najmanje {{this.minimalnaDuzinaLozinka}} karaktera
       </div>
-    </div>
+    
 
     <button type="button" 
             class="btn btn-primary" 

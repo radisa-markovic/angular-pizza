@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UcitajKorisnikeUspeh, UcitajKorisnike } from './store/akcije/korisnici.akcije';
+
 import { UcitajSastojke } from './store/akcije/sastojci.akcije';
 import { GlobalnoStanjeAplikacije } from './app.state';
 import { UcitajSveNarudzbine } from './store/akcije/narudzbina.akcije';
@@ -14,8 +14,10 @@ export class AppComponent {
   title = 'restoran-kafilerija';
 
   constructor(private store: Store<GlobalnoStanjeAplikacije>) {
-    this.store.dispatch(new UcitajKorisnike());
-    this.store.dispatch(new UcitajSastojke());
-    this.store.dispatch(new UcitajSveNarudzbine());
+    //-->> kad sam svojevremeno pravio aplikaciju, nisam znao ni za kakvo filtriranje, 
+    //-->> ni za loading, pa je ovo ostalo...
+    //this.store.dispatch(new UcitajKorisnike());
+    //this.store.dispatch(new UcitajSastojke());
+    //this.store.dispatch(new UcitajSveNarudzbine());
   };
 }

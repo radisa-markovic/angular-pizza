@@ -4,7 +4,7 @@ import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 
 import { UI } from 'src/app/store/reduceri/ui.reducer';
-import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
+import { A_OdjaviKorisnika } from 'src/app/store/akcije/korisnici.akcije';
 
 @Component({
   selector: 'app-header',
@@ -14,17 +14,19 @@ import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
 export class HeaderComponent implements OnInit {
   uiStanje: UI;
 
-  constructor(private router: Router, private store: Store<GlobalnoStanjeAplikacije>) {
-    let uiStanjeIzStore = this.store.select('uiStanje');
-    uiStanjeIzStore.subscribe(uiStanje => this.uiStanje = uiStanje);
-  }
-
+  constructor(private router: Router, 
+              private store: Store<GlobalnoStanjeAplikacije>)
+  { }
+  
   ngOnInit() {
+    this.store.select(stanje => stanje.uiStanje)
+              .subscribe(uiStanje => this.uiStanje = uiStanje);
   }
 
-  odjaviKorisnika(event: Event): void {
+  odjaviKorisnika(event: Event): void 
+  {
     event.preventDefault();
-    this.store.dispatch(new akcijeKorisnika.OdjaviKorisnika());
+    this.store.dispatch(A_OdjaviKorisnika());
     this.router.navigate(["/"]);
   }
 

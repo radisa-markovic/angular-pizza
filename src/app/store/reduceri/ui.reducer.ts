@@ -1,44 +1,54 @@
-import * as akcijeKorisnici from '../akcije/korisnici.akcije';
-import { Action } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
+import { A_OdjaviKorisnika, 
+         A_PrijaviKorisnikaPogresnaLozinka, 
+         A_PrijaviKorisnikaPogresnoKorisnickoIme, 
+         A_PrijaviKorisnikaUspeh
+       } from '../akcije/korisnici.akcije';
 
 export interface UI {
   nekoJePrijavljen: boolean,
   idPrijavljenogKorisnika: string,
   korisnickoIme: string,
-  narudzbineKorisnika: string[]
+  narudzbineKorisnika: string[],
+  korisnickoImeJePogresno: boolean,
+  lozinkaJePogresna: boolean
 }
 
 const pocetnoStanje: UI = {
   nekoJePrijavljen: false,
   idPrijavljenogKorisnika: '',
   korisnickoIme: '',
-  narudzbineKorisnika: []
+  narudzbineKorisnika: [],
+  korisnickoImeJePogresno: false,
+  lozinkaJePogresna: false
 };
 
-export function uiReducer(stanje = pocetnoStanje, akcija: Action): UI {
-  switch (akcija.type) {
-    case akcijeKorisnici.PRIJAVI_KORISNIKA:
-      {
-        const { korisnik } = (akcija as akcijeKorisnici.PrijaviKorisnika);
-        return {
-          ...stanje,
-          nekoJePrijavljen: true,
-          idPrijavljenogKorisnika: korisnik.id,
-          korisnickoIme: korisnik.korisnickoIme,
-          narudzbineKorisnika: korisnik.narudzbine
-        };
-      }
-    case akcijeKorisnici.ODJAVI_KORISNIKA:
-      {
-        return {
-          ...stanje,
-          nekoJePrijavljen: false,
-          idPrijavljenogKorisnika: '',
-          korisnickoIme: ''
-        };
-      }
+const ui_reducer = createReducer<UI>(pocetnoStanje, 
+  on(A_PrijaviKorisnikaPogresnoKorisnickoIme, (stanje) => ({
+    ...stanje,
+    korisnickoImeJePogresno: true,
+    lozinkaJePogresna: false
+  })),
+  on(A_PrijaviKorisnikaPogresnaLozinka, (stanje) => ({
+    ...stanje,
+    korisnickoImeJePogresno: false,
+    lozinkaJePogresna: true
+  })),
+  on(A_PrijaviKorisnikaUspeh, (stanje, {korisnickoIme}) => ({
+    ...stanje,
+    korisnickoIme: korisnickoIme,
+    nekoJePrijavljen: true,
+    korisnickoImeJePogresno: false,
+    lozinkaJePogresna: false
+  })),
+  on(A_OdjaviKorisnika, (stanje) => ({
+    ...stanje,
+    korisnickoIme: '',
+    nekoJePrijavljen: false
+  }))
+);
 
-    default:
-      return stanje;
-  }
+export default function reducer(stanje: UI, akcija: Action)
+{
+  return ui_reducer(stanje, akcija);
 }

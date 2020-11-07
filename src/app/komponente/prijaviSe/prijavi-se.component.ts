@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
-import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
+import { Observable } from 'rxjs';
+import { A_PrijaviKorisnika } from 'src/app/store/akcije/korisnici.akcije';
+import { UI } from 'src/app/store/reduceri/ui.reducer';
 
 @Component({
   selector: 'app-prijavi-se',
@@ -13,66 +15,43 @@ import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
 })
 export class PrijaviSeComponent implements OnInit {
   forma: FormGroup;
-  korisnickoIme: string;
-  lozinka: string;
-
-  korisnici: Object;
+  uiStanje$: Observable<UI>;
+  minimalnaDuzinaKorisnickogImena: number = 4;
+  minimalnaDuzinaLozinke: number = 7;
+  korisnickoImeJePogresno: boolean;
+  lozinkaJePogresna: boolean;
 
   constructor(private formBuilder: FormBuilder,
     private store: Store<GlobalnoStanjeAplikacije>,
-    private router: Router) { 
-    this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => {
-      this.korisnici = korisnici;
-    });
-    }
+    private router: Router)
+  { 
+    this.uiStanje$ = this.store.pipe(select(stanje => stanje.uiStanje));
+  }
 
   ngOnInit() {
-    this.forma = this.formBuilder.group({
-      'korisnickoIme': [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-      'lozinka': [null, Validators.compose([Validators.required, Validators.minLength(7)])]
+    this.uiStanje$.subscribe((stanje) => {
+      this.korisnickoImeJePogresno = stanje.korisnickoImeJePogresno,
+      this.lozinkaJePogresna = stanje.lozinkaJePogresna
     });
+
+    this.forma = this.formBuilder.group({
+      'korisnickoIme': [null, Validators.compose([Validators.required, 
+                                                  Validators.minLength(this.minimalnaDuzinaKorisnickogImena)])],
+      'lozinka': [null, Validators.compose([Validators.required, 
+                                            Validators.minLength(this.minimalnaDuzinaLozinke)])]
+    });
+
+  }
+
+  kontrolaNijeValidna(nazivKontrole: string): boolean
+  {
+    return !this.forma.controls[nazivKontrole].valid && 
+            this.forma.controls[nazivKontrole].touched;
   }
 
   prijaviKorisnika(): void {
     const { korisnickoIme, lozinka } = this.forma.value;
-
-    let korisnickoImeJeIspravno = this.proveriKorisnickoIme(korisnickoIme);
-    let lozinkaJeIspravna = this.proveriLozinku(korisnickoIme, lozinka);
-
-    if (korisnickoImeJeIspravno)
-      alert(`Korisnik "${korisnickoIme}" postoji u bazi`);
-    else
-      alert(`Nepostojece korisnicko ime "${korisnickoIme}"`);
-
-    if(!lozinkaJeIspravna)
-      alert(`Neispravna lozinka`);
-
-    if (korisnickoImeJeIspravno && lozinkaJeIspravna) {
-      this.store.dispatch(new akcijeKorisnika.PrijaviKorisnika(this.korisnici[korisnickoIme]));
-      this.router.navigate(["/naruciProizvod"]);
-    }
+    this.store.dispatch(A_PrijaviKorisnika({korisnickoIme, lozinka}));
   }
 
-  proveriKorisnickoIme(korisnickoIme: string): boolean {
-    let sviKorisnici: Object;
-    this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => {
-      sviKorisnici = korisnici;
-    });
-
-    return (sviKorisnici.hasOwnProperty(korisnickoIme));//true je ako sam uboo korisnicko ime
-  }
-
-  proveriLozinku(korisnickoIme: string, lozinka: string): boolean {
-    let sviKorisnici: any;
-    this.store.select(korisnickiReducer.selectEntities).subscribe(korisnici => sviKorisnici = korisnici);
-    
-    if (sviKorisnici.hasOwnProperty(korisnickoIme)) {
-      let korisnik = sviKorisnici[korisnickoIme];
-      return (korisnik.lozinka === lozinka);
-    }
-    else {
-      alert(`Korisnik "${korisnickoIme}" ne postoji ovde`);
-      return false;
-    }
-  }
 }

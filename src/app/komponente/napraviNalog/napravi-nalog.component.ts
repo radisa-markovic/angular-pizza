@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+
+import { select, Store } from '@ngrx/store';
 import * as identifikator from 'uuid';
 
 import { GlobalnoStanjeAplikacije } from '../../app.state';
-import * as akcijeKorisnika from '../../store/akcije/korisnici.akcije';
-import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
+
 import { Observable } from 'rxjs';
-import { Korisnik } from '../../modeli-podataka/Korisnik.model';
+import { A_RegistrujKorisnika } from 'src/app/store/akcije/korisnici.akcije';
 
 @Component({
   selector: 'app-napravi-nalog',
@@ -17,62 +15,46 @@ import { Korisnik } from '../../modeli-podataka/Korisnik.model';
   styleUrls: ['./napravi-nalog.component.css']
 })
 export class NapraviNalogComponent implements OnInit {
-  korisnici: Observable<Korisnik[]>; //ovo je ono sto uzimam iz stanja
-
-  forma: FormGroup;
-  ime: string;
-  prezime: string;
-  korisnickoIme: string;
-  lozinka: string;
-  porukaOGresci: string = "Označeno polje se mora ispuniti";
+  protected forma: FormGroup;
+  protected minimalnaDuzinaKorisnickoIme: number = 4;
+  protected minimalnaDuzinaLozinka: number = 7;
+  protected korisnickoImeJeZauzeto: boolean; //veoma odvratan kod
+  public porukaOGresci: string = "Označeno polje se mora ispuniti";
+  korisnickoStanje$: Observable<any>;
 
   constructor(private formBuilder: FormBuilder, 
-    private store: Store<GlobalnoStanjeAplikacije>, 
-    private router: Router) { }
+              private store: Store<GlobalnoStanjeAplikacije>) 
+  {
+    this.korisnickoStanje$ = this.store.pipe(select(stanje => stanje.korisnici));
+  }
 
-  ngOnInit() {
-    this.korisnici = this.store.select(korisnickiReducer.selectAll);
-    this.korisnici.subscribe(korisnici => console.log(korisnici));
+  ngOnInit(): void 
+  {
+    this.korisnickoStanje$.subscribe((stanje) => {
+      console.log(stanje);
+      this.korisnickoImeJeZauzeto = stanje.korisnickoImeJeZauzeto;
+    });
 
     this.forma = this.formBuilder.group({
       'ime': [null, Validators.required],
       'prezime': [null, Validators.required],
-      'korisnickoIme': [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-      'lozinka': [null, Validators.compose([Validators.required, Validators.minLength(7)])]
+      'korisnickoIme': [null, Validators.compose([Validators.required, 
+                                                  Validators.minLength(this.minimalnaDuzinaKorisnickoIme)])],
+      'lozinka': [null, Validators.compose([Validators.required, 
+                                            Validators.minLength(this.minimalnaDuzinaLozinka)])]
     });
+
   }
 
-  registrujKorisnika(): void {
-    const { ime, prezime, korisnickoIme, lozinka } = this.forma.value;
-
-    let imeJeZauzeto = this.proveriKorisnickoIme(korisnickoIme);
-
-    if(!imeJeZauzeto)
-    {
-      let noviKorisnik: Korisnik = {
-        id: identifikator.v4(),
-        ime: ime,
-        prezime: prezime,
-        korisnickoIme: korisnickoIme,
-        lozinka: lozinka,
-        narudzbine: []
-      };
-      this.store.dispatch(new akcijeKorisnika.RegistrujKorisnika(noviKorisnik));
-      this.router.navigate(["/prijaviSe"]);
-    }
-    else
-    {
-      alert(`Korisnicko ime je zauzeto`);
-    }
+  kontrolaNijeValidna(nazivKontrole: string): boolean
+  {
+    return !this.forma.controls[nazivKontrole].valid && 
+            this.forma.controls[nazivKontrole].touched;
   }
 
-  proveriKorisnickoIme(korisnickoIme: any): boolean {
-    let nekaPromenljiva: Object;
-    this.store.select(korisnickiReducer.selectEntities).subscribe(vrednost => {
-      nekaPromenljiva = vrednost;
-    });
-    console.log(nekaPromenljiva);
-   
-    return (nekaPromenljiva.hasOwnProperty(korisnickoIme));
+  registrujKorisnika(): void 
+  {
+    this.store.dispatch(A_RegistrujKorisnika({korisnik: this.forma.value}));
   }
+
 }
