@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';//nece './Observable
 import { catchError } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 
-import { Pica } from '../modeli-podataka/Pica.model';
+import { Pica } from '../models/Pica.model';
 
 @Injectable({
   providedIn: 'root'

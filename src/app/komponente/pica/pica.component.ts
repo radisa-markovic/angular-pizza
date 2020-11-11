@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Sastojak } from '../../modeli-podataka/Sastojak.model';
-import { SastojciService } from '../../servisi/sastojci.service';
+import { Sastojak } from '../../models/Sastojak.model';
 import { Router } from '@angular/router';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 
-import * as picaAkcije from '../../store/akcije/pica.akcije';
-import * as sastojakSelektor from '../../store/selektori/sastojak.selektor';
-import * as proizvodAkcije from '../../store/akcije/narudzbina.akcije';
+
 import * as uuid from 'uuid';
-import { Pica } from 'src/app/modeli-podataka/Pica.model';
+import { Pica } from '../../models/Pica.model';
+import { A_UcitajSastojke } from 'src/app/store/akcije/sastojci.akcije';
+import { A_DodajNovuPicu, A_UpisiPicuKodKorisnikaUBazu } from '../../store/akcije/pica.akcije';
+import { StanjePice } from 'src/app/store/reduceri/pica.reducer';
+import { Observable } from 'rxjs';
+import { SastojciStanje } from 'src/app/store/reduceri/sastojci.reducer';
 
 @Component({
   selector: 'app-pica',
@@ -19,35 +21,53 @@ import { Pica } from 'src/app/modeli-podataka/Pica.model';
 export class PicaComponent implements OnInit {
   osnovnaCena: number;
   cenaOdSastojaka: number;
-  brojKomada: number;
-  ukupnaCena: number;
-  sastojci: Sastojak[];
-  
-  cekiraniSastojci: string[] = []; // ovde ubacujem identifikatore koji su brojevi, mozda bolje string da bude
+  brojKomada: number = 1;
+  sastojciNaPici: string[];
+
+  ponudaSastojakaPice: Sastojak[] = []; //ovde je renderovanje za view
+  sastojciSuUcitani: boolean = false;
+  private stanjePice$: Observable<StanjePice>;
+  private stanjeSastojaka$: Observable<SastojciStanje>;
+
   constructor(private store: Store<GlobalnoStanjeAplikacije>,
-              private router: Router) { }
+              private router: Router) 
+  {
+    this.stanjePice$ = this.store.pipe(
+      select(stanje => stanje.picaStanje)
+    );
+    this.stanjeSastojaka$ = this.store.pipe(
+      select(stanje => stanje.sastojci)
+    );
+  }
 
   ngOnInit() {
+    //kao popravljam efikasnost, da samo jednom pozove bazu za podatke
+    this.stanjeSastojaka$.subscribe((stanje) => {
+      this.sastojciSuUcitani = stanje.sastojciSuUcitani;
+      this.ponudaSastojakaPice = stanje.sastojci;
+    });
+
+    this.stanjePice$.subscribe((stanje) => {
+      this.cenaOdSastojaka = stanje.pica.cenaOdSastojaka;
+      this.sastojciNaPici = stanje.pica.sastojci;
+    });
+
+    if(!this.sastojciSuUcitani)
+      this.store.dispatch(A_UcitajSastojke());
+
+    //mora zbog osnovne cene da ovako korigujem
     let cekiraniRadioButton: HTMLInputElement = document.querySelector("input[name='radioButtonVelicinaPice']:checked");
     this.osnovnaCena = parseInt(cekiraniRadioButton.value);
-    this.brojKomada = 1;
-    this.cenaOdSastojaka = 0;
-    this.ukupnaCena = this.preracunajUkupnuCenu();
-
-    let selekcija = this.store.select(sastojakSelektor.selectAll);
-    selekcija.subscribe(ucitaniSastojci => {
-      this.sastojci = ucitaniSastojci
-    });
+    
   }
 
   promeniVelicinuPice(event: Event): void {
-    let radioButton: HTMLInputElement = event.target as HTMLInputElement;
+    let radioButton: HTMLInputElement = <HTMLInputElement>event.target;
     this.osnovnaCena = parseInt(radioButton.value);
-    this.ukupnaCena = this.preracunajUkupnuCenu();
   }
 
   promeniBrojKomada(event: Event): void {
-    let inputBrojKomada: HTMLInputElement = event.target as HTMLInputElement;
+    let inputBrojKomada = <HTMLInputElement>event.target;
     let noviBrojKomada = parseInt(inputBrojKomada.value);
     if (noviBrojKomada < 1)
     { 
@@ -55,8 +75,7 @@ export class PicaComponent implements OnInit {
       inputBrojKomada.value = '1';
     }
     else
-       this.brojKomada = noviBrojKomada;
-    this.ukupnaCena = this.preracunajUkupnuCenu();    
+       this.brojKomada = noviBrojKomada;  
   }
 
   //mozda postoji i lepsa varijanta ovoga
@@ -65,43 +84,28 @@ export class PicaComponent implements OnInit {
     return (this.osnovnaCena + this.cenaOdSastojaka) * this.brojKomada;
   }
 
-  klikniNaSastojak(event: Event, sastojak: Sastojak): void
+  
+
+  potvrdiPicu(): void 
   {
-
-    let cekiraniSastojak: HTMLInputElement = <HTMLInputElement>event.target;
-    if(cekiraniSastojak.checked)
-    {
-      this.cekiraniSastojci.push(sastojak.naziv);
-      this.cenaOdSastojaka += sastojak.cena;
-      this.ukupnaCena = this.preracunajUkupnuCenu();
-    }
-    else
-    {
-      this.cekiraniSastojci = this.cekiraniSastojci.filter(identifikatori => identifikatori !== sastojak.naziv);
-      this.cenaOdSastojaka -= sastojak.cena;
-      this.ukupnaCena = this.preracunajUkupnuCenu();
-    }
-    console.log(this.cekiraniSastojci);
-  }
-
-  potvrdiPicu(): void {
     let novaPica: Pica = {
       id: uuid.v4(), 
       brojKomada: this.brojKomada,
       osnovnaCena: this.osnovnaCena,
-      ukupnaCena: this.ukupnaCena,
-      sastojci: this.cekiraniSastojci
+      cenaOdSastojaka: this.cenaOdSastojaka,
+      ukupnaCena: this.preracunajUkupnuCenu(),
+      sastojci: this.sastojciNaPici
     };
+    
     let idKorisnika: string, korisnickoIme: string;
-    this.store.select('uiStanje').subscribe(uiInfo => {
-      idKorisnika = uiInfo.idPrijavljenogKorisnika;
-      korisnickoIme = uiInfo.korisnickoIme;
+    this.store.select(stanje => stanje.korisnici).subscribe(korisnikInfo => {
+      korisnickoIme = korisnikInfo.korisnickoIme;
     });
     
-    console.log(korisnickoIme);
+    console.log(novaPica);
 
-    this.store.dispatch(new picaAkcije.DodajNovuPicu(korisnickoIme, novaPica));
-    this.store.dispatch(new picaAkcije.UpisiPicuKodKorisnikaUBazu(idKorisnika, novaPica));
+    this.store.dispatch(A_DodajNovuPicu({novaPica}));
+    this.store.dispatch(A_UpisiPicuKodKorisnikaUBazu({korisnickoIme, novaPica}));
     alert(`Narudžbina je uspešno dodata`);
     this.router.navigate(["/naruciProizvod"]);
   }

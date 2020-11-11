@@ -8,6 +8,7 @@ import { GlobalnoStanjeAplikacije } from '../../app.state';
 
 import { Observable } from 'rxjs';
 import { A_RegistrujKorisnika } from 'src/app/store/akcije/korisnici.akcije';
+import { Korisnik } from 'src/app/models/Korisnik.model';
 
 @Component({
   selector: 'app-napravi-nalog',
@@ -54,7 +55,11 @@ export class NapraviNalogComponent implements OnInit {
 
   registrujKorisnika(): void 
   {
-    this.store.dispatch(A_RegistrujKorisnika({korisnik: this.forma.value}));
+    let noviKorisnik: Korisnik = this.forma.value;
+    noviKorisnik.narudzbine = [];//<<--- ovo je bitno jer inace nece ni postojati ovaj property kod novog..
+    //.. korisnika, pa se ne mogu ni dodavati narudzbine (to forma nema)
+   
+    this.store.dispatch(A_RegistrujKorisnika({korisnik: noviKorisnik}));
   }
 
 }

@@ -10,11 +10,11 @@
              class="form-control">
       <div class="alert alert-danger"
            *ngIf="kontrolaNijeValidna('korisnickoIme')">
-        Korisnicko ime mora biti duzine {{this.minimalnaDuzinaKorisnickogImena}}
+        Korisničko ime mora biti dužine {{this.minimalnaDuzinaKorisnickogImena}}
       </div>
       <div class="alert alert-danger"
            *ngIf="this.korisnickoImeJePogresno">
-        Korisnicko ime je pogresno
+        Korisničko ime je pogrešno
       </div>
 
       <label for="inputLozinka">Lozinka:</label>
@@ -24,11 +24,11 @@
              class="form-control">
       <div class="alert alert-danger" 
            *ngIf="kontrolaNijeValidna('lozinka')">
-        Lozinka mora biti duzine {{this.minimalnaDuzinaLozinke}}
+        Lozinka mora biti dužine {{this.minimalnaDuzinaLozinke}}
       </div>
       <div class="alert alert-danger"
            *ngIf="this.lozinkaJePogresna">
-        Lozinka je pogresna
+        Lozinka je pogrešna
       </div>
 
       <button type="button" 

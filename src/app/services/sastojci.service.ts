@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Sastojak } from '../modeli-podataka/Sastojak.model';
+import { Sastojak } from '../models/Sastojak.model';
 
 @Injectable({
   providedIn: 'root'

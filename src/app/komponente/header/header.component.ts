@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
+import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 
 import { UI } from 'src/app/store/reduceri/ui.reducer';
 import { A_OdjaviKorisnika } from 'src/app/store/akcije/korisnici.akcije';

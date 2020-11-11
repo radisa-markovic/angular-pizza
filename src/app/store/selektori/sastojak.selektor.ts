@@ -1,4 +1,4 @@
-import { Sastojak } from '../../modeli-podataka/Sastojak.model';
+import { Sastojak } from '../../models/Sastojak.model';
 import { createFeatureSelector } from '@ngrx/store';
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 

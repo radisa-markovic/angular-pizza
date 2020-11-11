@@ -1,6 +1,11 @@
 <div class="container">
-  <h1>Nova pica: <span>Dosadašnja cena: {{ukupnaCena}} RSD</span></h1>
-
+  <h1>
+    <a class="btn btn-danger btn-lg" 
+       routerLink="/naruciProizvod">
+        Nazad
+    </a>
+    Nova pica: Dosadašnja cena: {{ this.preracunajUkupnuCenu() }} RSD
+  </h1>
   <div class="btn-group-vertical">
     <label>
       <input type="radio" 
@@ -34,19 +39,21 @@
            required 
            value=1>
   </div>
-  <div class="row">
-    <app-sastojak *ngFor="let sastojak of sastojci" 
-                  [sastojak]="sastojak"
-                  (cekiraniSastojak)="klikniNaSastojak($event, sastojak)">
+
+  <div class="row"
+       *ngIf="this.sastojciSuUcitani === true; else loadingScreen">
+    <app-sastojak *ngFor="let sastojak of this.ponudaSastojakaPice" 
+                  [sastojak]="sastojak">
     </app-sastojak>
   </div>
+
+  <ng-template class="row"
+       #loadingScreen>
+      <h3>Loading...</h3>
+  </ng-template>
 
   <button class="btn btn-primary btn-lg" 
           (click)="potvrdiPicu()">
           Potvrdi
-  </button>
-  <button class="btn btn-danger btn-lg" 
-          (click)="vratiSeNaPocetnuStranicu()">
-          Nazad
   </button>
 </div>

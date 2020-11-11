@@ -6,11 +6,13 @@ import { NapraviNalogComponent } from './komponente/napraviNalog/napravi-nalog.c
 import { PrijaviSeComponent } from './komponente/prijaviSe/prijavi-se.component';
 import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component';
 import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component';
+import { SendvicComponent } from './komponente/sendvic/sendvic.component';
 
 const routes: Routes = [
   { path: '', component: PocetnaStranicaComponent },
   { path: 'naruciProizvod', component: NaruciProizvodComponent },
   { path: 'naruciProizvod/pica', component: PicaComponent },
+  { path: 'naruciProizvod/sendvic', component: SendvicComponent },
   { path: 'napraviNalog', component: NapraviNalogComponent },
   { path: 'prijaviSe', component: PrijaviSeComponent },
   { path: 'trenutnaPorudzbina', component: NarudzbinaComponent },

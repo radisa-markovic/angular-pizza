@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Narudzbina } from '../modeli-podataka/Narudzbina.model';
+import { Narudzbina } from '../models/Narudzbina.model';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 

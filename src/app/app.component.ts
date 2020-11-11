@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { UcitajSastojke } from './store/akcije/sastojci.akcije';
 import { GlobalnoStanjeAplikacije } from './app.state';
 import { UcitajSveNarudzbine } from './store/akcije/narudzbina.akcije';
 

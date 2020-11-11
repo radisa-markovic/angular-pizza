@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { Korisnik } from '../../modeli-podataka/Korisnik.model';
+import { Korisnik } from '../../models/Korisnik.model';
 
-export enum AkcijeNadKorisnicima
+enum AkcijeNadKorisnicima
 {
   REGISTRUJ_KORISNIKA = '[Akcije nad korisnicima] Registruj korisnika',
   REGISTRUJ_KORISNIKA_USPEH = '[Akcije nad korisnicima] Registruj korisnika uspeh',
@@ -26,5 +26,5 @@ export const A_PrijaviKorisnika = createAction(AkcijeNadKorisnicima.PRIJAVI_KORI
 export const A_PrijaviKorisnikaPogresnoKorisnickoIme = createAction(AkcijeNadKorisnicima.PRIJAVI_KORISNIKA_POGRESNO_KORISNICKO_IME);
 export const A_PrijaviKorisnikaPogresnaLozinka = createAction(AkcijeNadKorisnicima.PRIJAVI_KORISNIKA_POGRESNA_LOZINKA);
 export const A_PrijaviKorisnikaUspeh = createAction(AkcijeNadKorisnicima.PRIJAVI_KORISNIKA_USPEH,
-                                                    props<{korisnickoIme: string}>());
+                                                    props<{korisnik: Partial<Korisnik>}>());
 export const A_OdjaviKorisnika = createAction(AkcijeNadKorisnicima.ODJAVI_KORISNIKA);

@@ -7,18 +7,14 @@ import { A_OdjaviKorisnika,
 
 export interface UI {
   nekoJePrijavljen: boolean,
-  idPrijavljenogKorisnika: string,
-  korisnickoIme: string,
-  narudzbineKorisnika: string[],
+  korisnickoImeJeZauzeto: boolean,
   korisnickoImeJePogresno: boolean,
   lozinkaJePogresna: boolean
 }
 
 const pocetnoStanje: UI = {
   nekoJePrijavljen: false,
-  idPrijavljenogKorisnika: '',
-  korisnickoIme: '',
-  narudzbineKorisnika: [],
+  korisnickoImeJeZauzeto: false,
   korisnickoImeJePogresno: false,
   lozinkaJePogresna: false
 };
@@ -34,17 +30,19 @@ const ui_reducer = createReducer<UI>(pocetnoStanje,
     korisnickoImeJePogresno: false,
     lozinkaJePogresna: true
   })),
-  on(A_PrijaviKorisnikaUspeh, (stanje, {korisnickoIme}) => ({
+  on(A_PrijaviKorisnikaUspeh, (stanje, {korisnik}) => ({
     ...stanje,
-    korisnickoIme: korisnickoIme,
+    korisnickoIme: korisnik.korisnickoIme,
     nekoJePrijavljen: true,
     korisnickoImeJePogresno: false,
     lozinkaJePogresna: false
   })),
   on(A_OdjaviKorisnika, (stanje) => ({
     ...stanje,
-    korisnickoIme: '',
-    nekoJePrijavljen: false
+    nekoJePrijavljen: false,
+    korisnickoImeJeZauzeto: false,
+    korisnickoImeJePogresno: false,
+    lozinkaJePogresna: false
   }))
 );
 

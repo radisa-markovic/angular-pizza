@@ -1,29 +1,28 @@
-import { Sastojak } from '../../modeli-podataka/Sastojak.model';//treba mi reducer koji je doduse dosta prost
+import { Sastojak } from '../../models/Sastojak.model';//treba mi reducer koji je doduse dosta prost
 import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
-import { Action } from '@ngrx/store';
-import * as akcijeSastojci from '../akcije/sastojci.akcije';
+import { Action, createReducer, on } from '@ngrx/store';
+import { A_UcitajSastojkeUspeh } from '../akcije/sastojci.akcije';
 
-
-export const adapterSastojaka: EntityAdapter<Sastojak> = createEntityAdapter<Sastojak>({
-  selectId: sastojak => sastojak.naziv
-});
-
-export interface SastojciStanje extends EntityState<Sastojak> { }
-
-const pocetnoStanjeSastojaka: SastojciStanje = adapterSastojaka.getInitialState();
-
-export function reducerSastojaka(stanje = pocetnoStanjeSastojaka, akcija: Action): SastojciStanje
+export interface SastojciStanje
 {
-  switch(akcija.type)
-  {
-    case akcijeSastojci.UCITAJ_SASTOJKE_USPEH:
-      {
-        return adapterSastojaka.addAll((akcija as akcijeSastojci.UcitajSastojkeUspeh).sastojci, stanje);
-      }
+  sastojci: Sastojak[],
+  sastojciSuUcitani: boolean
+};
 
-    default:
-      {
-        return stanje;
-      }
-  }
+const pocetnoStanje: SastojciStanje = {
+  sastojci: [],
+  sastojciSuUcitani: false
+};
+
+const sastojciReducer = createReducer<SastojciStanje>(pocetnoStanje,
+  on(A_UcitajSastojkeUspeh, (stanje, {sastojci}) => ({
+    ...stanje,
+    sastojci: sastojci,
+    sastojciSuUcitani: true
+  }))  
+);
+
+export default function Reducer(stanje: SastojciStanje, akcija: Action)
+{
+  return sastojciReducer(stanje, akcija);
 }

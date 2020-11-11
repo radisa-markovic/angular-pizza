@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Narudzbina } from '../../modeli-podataka/Narudzbina.model';
+import { Narudzbina } from '../../models/Narudzbina.model';
 
 @Component({
   selector: 'app-proizvod',

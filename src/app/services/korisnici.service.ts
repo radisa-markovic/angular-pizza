@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
-import { Korisnik } from '../modeli-podataka/Korisnik.model';
+import { Korisnik } from '../models/Korisnik.model';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -16,24 +16,22 @@ export class KorisniciService {
   //zbog povratnog tipa ovde zeza efekat ponekad
   upisiKorisnikaUBazu(noviKorisnik: Korisnik)
   {
-    console.log(noviKorisnik);
     //moram da subscribe odradim na post kako bi radilo, jeste ruzno, al ono, ako radi-radi za sada
     this.httpKlijent.post<Korisnik>(`${this.putanjaDoKorisnika}`, noviKorisnik).subscribe();//da vidim dal radi
   }
 
-  //moram da prati kakve podatke vraca json server
+  //moram da pratim kakve podatke vraca json server
   vratiKorisnika(korisnickoIme: string): Observable<Korisnik[]>
   {
     return this.httpKlijent.get<Korisnik[]>(`${this.putanjaDoKorisnika}/?korisnickoIme=${korisnickoIme}`);
   }
 
-  dodajNarudzbinu(idNarudzbine: string, idKorisnika: string): Observable<Korisnik> 
+  dodajNarudzbinu(idNarudzbine: string, korisnickoIme: string): void
   {
-    return this.httpKlijent.get<Korisnik>(`${this.putanjaDoKorisnika}/${idKorisnika}`).pipe(
-      tap(korisnik => console.log(korisnik.narudzbine)),
-      tap(korisnik => korisnik.narudzbine.push(idNarudzbine)),
-      switchMap(apdejtovaniKorisnik => this.httpKlijent.put<Korisnik>(`${this.putanjaDoKorisnika}/${idKorisnika}`, apdejtovaniKorisnik))
-    );
+    //neka fora ima ako je niz narudzbina prazan, ne znam dal da saljem akciju kad se odjavljuje korisnik...
+    console.log(korisnickoIme, idNarudzbine);
+    this.httpKlijent.patch<Korisnik>(`${this.putanjaDoKorisnika}/?korisnickoIme=${korisnickoIme}`, 
+                                      JSON.stringify({narudzbine: idNarudzbine}));
   }
 
   vratiKorisnike(): Observable<Korisnik[]> {

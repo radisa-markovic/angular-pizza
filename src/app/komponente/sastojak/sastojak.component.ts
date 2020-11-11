@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Sastojak } from '../../modeli-podataka/Sastojak.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { Sastojak } from '../../models/Sastojak.model';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import * as sastojakAkcije from '../../store/akcije/sastojci.akcije';//odvratna putanja
+import { A_DodajSastojakNaPicu, A_UkloniSastojakSaPice } from 'src/app/store/akcije/sastojci.akcije';
 
 @Component({
   selector: 'app-sastojak',
@@ -11,18 +11,21 @@ import * as sastojakAkcije from '../../store/akcije/sastojci.akcije';//odvratna 
 })
 export class SastojakComponent implements OnInit {
   @Input() sastojak: Sastojak;
-  @Output() cekiraniSastojak: EventEmitter<Event> = new EventEmitter();
-
+  
   constructor(private store: Store<GlobalnoStanjeAplikacije>) { }
 
   ngOnInit() {
+    
   }
 
-  selektujSastojak(event: Event) {
-    this.cekiraniSastojak.emit(event);
+  selektujSastojak(event: Event) 
+  {
+    const dugme = <HTMLInputElement>event.target;
+    
+    if(dugme.checked)
+      this.store.dispatch(A_DodajSastojakNaPicu({sastojak: this.sastojak}));
+    else
+      this.store.dispatch(A_UkloniSastojakSaPice({sastojak: this.sastojak}));
   }
 
-  emitujCekiraniSastojak(sastojak: Sastojak) {
-    console.log("nesto");
-  }
 }

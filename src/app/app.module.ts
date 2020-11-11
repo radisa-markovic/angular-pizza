@@ -5,8 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reduceri/korisnici.reducer'
-import { reducerNarudzbine } from './store/reduceri/narudzbina.reducer';
-import { reducerSastojaka } from './store/reduceri/sastojci.reducer';
+import reducerNarudzbine from './store/reduceri/narudzbina.reducer';
+import picaReducer from './store/reduceri/pica.reducer';
+import reducerSastojaka from './store/reduceri/sastojci.reducer';
 import  uiReducer from './store/reduceri/ui.reducer'; //default i Petkovic
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,7 @@ import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proi
 import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component'
 import { NarudzbinaEfekti } from './store/efekti/narudzbina.efekti';
 import { ProizvodComponent } from './komponente/proizvod/proizvod.component';
+import { SendvicComponent } from './komponente/sendvic/sendvic.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { ProizvodComponent } from './komponente/proizvod/proizvod.component';
     PrijaviSeComponent,
     NaruciProizvodComponent,
     NarudzbinaComponent,
-    ProizvodComponent
+    ProizvodComponent,
+    SendvicComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { ProizvodComponent } from './komponente/proizvod/proizvod.component';
     StoreModule.forRoot({
       korisnici: reducer,
       uiStanje: uiReducer,
+      picaStanje: picaReducer,
       narudzbina: reducerNarudzbine,
       sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem
     }),
