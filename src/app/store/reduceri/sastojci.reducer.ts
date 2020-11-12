@@ -1,4 +1,4 @@
-import { Sastojak } from '../../models/Sastojak.model';//treba mi reducer koji je doduse dosta prost
+import { Sastojak } from '../../models/Sastojak.model';
 import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 import { A_UcitajSastojkeUspeh } from '../akcije/sastojci.akcije';

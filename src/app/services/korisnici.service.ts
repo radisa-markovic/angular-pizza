@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Korisnik } from '../models/Korisnik.model';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
+import { Narudzbina } from '../models/Narudzbina.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,15 @@ export class KorisniciService {
     return this.httpKlijent.get<Korisnik[]>(`${this.putanjaDoKorisnika}/?korisnickoIme=${korisnickoIme}`);
   }
 
-  dodajNarudzbinu(idNarudzbine: string, korisnickoIme: string): void
+  dodajNarudzbinu(narudzbina: Narudzbina, korisnickoIme: string): void
   {
     //neka fora ima ako je niz narudzbina prazan, ne znam dal da saljem akciju kad se odjavljuje korisnik...
-    console.log(korisnickoIme, idNarudzbine);
-    this.httpKlijent.patch<Korisnik>(`${this.putanjaDoKorisnika}/?korisnickoIme=${korisnickoIme}`, 
-                                      JSON.stringify({narudzbine: idNarudzbine}));
+    //patch nije hteo da radi, jebem li ga sto, pa sam improvizovao sa ovim json-serverom
+    this.httpKlijent.get<Korisnik[]>(`${this.putanjaDoKorisnika}/?korisnickoIme=${korisnickoIme}`).subscribe(nesto => {
+      let korisnik = nesto[0];
+      korisnik.narudzbine.push(narudzbina);
+      this.httpKlijent.patch<Korisnik[]>(`${this.putanjaDoKorisnika}/${korisnickoIme}`, korisnik).subscribe();
+    });
   }
 
   vratiKorisnike(): Observable<Korisnik[]> {

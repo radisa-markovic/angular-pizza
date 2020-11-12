@@ -6,6 +6,7 @@ import { A_OdjaviKorisnika,
        } from '../akcije/korisnici.akcije';
 
 export interface UI {
+  korisnickoIme: string
   nekoJePrijavljen: boolean,
   korisnickoImeJeZauzeto: boolean,
   korisnickoImeJePogresno: boolean,
@@ -13,6 +14,7 @@ export interface UI {
 }
 
 const pocetnoStanje: UI = {
+  korisnickoIme: "",
   nekoJePrijavljen: false,
   korisnickoImeJeZauzeto: false,
   korisnickoImeJePogresno: false,

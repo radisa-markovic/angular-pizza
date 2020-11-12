@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 import { select, Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import * as korisnickiReducer from '../../store/reduceri/korisnici.reducer';
 import { Observable } from 'rxjs';
 import { A_PrijaviKorisnika } from 'src/app/store/akcije/korisnici.akcije';
 import { UI } from 'src/app/store/reduceri/ui.reducer';
@@ -22,8 +21,7 @@ export class PrijaviSeComponent implements OnInit {
   lozinkaJePogresna: boolean;
 
   constructor(private formBuilder: FormBuilder,
-    private store: Store<GlobalnoStanjeAplikacije>,
-    private router: Router)
+              private store: Store<GlobalnoStanjeAplikacije>)
   { 
     this.uiStanje$ = this.store.pipe(select(stanje => stanje.uiStanje));
   }

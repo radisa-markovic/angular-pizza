@@ -5,10 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reduceri/korisnici.reducer'
-import reducerNarudzbine from './store/reduceri/narudzbina.reducer';
 import picaReducer from './store/reduceri/pica.reducer';
 import reducerSastojaka from './store/reduceri/sastojci.reducer';
-import  uiReducer from './store/reduceri/ui.reducer'; //default i Petkovic
+import  uiReducer from './store/reduceri/ui.reducer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +24,6 @@ import { SastojciEfekti } from './store/efekti/sastojci.efekti';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NaruciProizvodComponent } from './komponente/naruciProizvod/naruci-proizvod.component';
 import { NarudzbinaComponent } from './komponente/narudzbina/narudzbina.component'
-import { NarudzbinaEfekti } from './store/efekti/narudzbina.efekti';
 import { ProizvodComponent } from './komponente/proizvod/proizvod.component';
 import { SendvicComponent } from './komponente/sendvic/sendvic.component';
 
@@ -53,10 +51,9 @@ import { SendvicComponent } from './komponente/sendvic/sendvic.component';
       korisnici: reducer,
       uiStanje: uiReducer,
       picaStanje: picaReducer,
-      narudzbina: reducerNarudzbine,
-      sastojci: reducerSastojaka //ovo je popravljeno, samo efekte jos da nadjem
+      sastojci: reducerSastojaka
     }),
-    EffectsModule.forRoot([KorisniciEfekti, SastojciEfekti, NarudzbinaEfekti]), //ovde stimujem efekte valjda
+    EffectsModule.forRoot([KorisniciEfekti, SastojciEfekti]),
     StoreDevtoolsModule.instrument({ maxAge: 25 })
   ],
   providers: [],

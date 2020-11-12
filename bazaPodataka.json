@@ -1,77 +1,57 @@
 {
   "korisnici": [
     {
-      "id": "54ab6280-9d4f-4f36-884e-3affa0361d96",
-      "ime": "Radiša",
-      "prezime": "Marković",
-      "korisnickoIme": "radeCU",
-      "lozinka": "mnogoSamGlup",
-      "narudzbine": [
-        "9984f456-1bf8-47f6-a665-98b60066ed89",
-        "2ca91b85-8de3-4242-83e8-ab2f0ead1ba3",
-        "b23c84fb-2909-440f-8ad5-a58074ef84bd"
-      ]
-    },
-    {
-      "id": "5c4f5a87-3b8f-4e1d-99e2-874053f30a81",
-      "ime": "Milovan",
-      "prezime": "Markovic",
-      "korisnickoIme": "dedaMilovan",
-      "lozinka": "milovan",
-      "narudzbine": [
-        "4df3ae9d-cf8d-4703-ba8b-e755957c97e4"
-      ]
-    },
-    {
       "ime": "Rade",
       "prezime": "Radic",
       "korisnickoIme": "test",
       "lozinka": "testtest",
-      "narudzbine": [],
-      "id": "1R6kLBX"
-    }
-  ],
-  "narudzbine": [
-    {
-      "id": "9984f456-1bf8-47f6-a665-98b60066ed89",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 830,
-      "sastojci": [
-        "Masline",
-        "Šampinjoni",
-        "Kulen"
-      ]
-    },
-    {
-      "id": "4df3ae9d-cf8d-4703-ba8b-e755957c97e4",
-      "naziv": "Pica",
-      "brojKomada": 4,
-      "cena": 2920,
-      "sastojci": [
-        "Sir",
-        "Ljuti sos"
-      ]
-    },
-    {
-      "id": "2ca91b85-8de3-4242-83e8-ab2f0ead1ba3",
-      "naziv": "Pica",
-      "brojKomada": 1,
-      "cena": 500,
-      "sastojci": [
-        "Ljuti sos"
-      ]
-    },
-    {
-      "id": "b23c84fb-2909-440f-8ad5-a58074ef84bd",
-      "naziv": "Pica",
-      "brojKomada": 4,
-      "cena": 3960,
-      "sastojci": [
-        "Šampinjoni",
-        "Kulen",
-        "Šunka",
-        "Ljuti sos"
+      "id": "test",
+      "narudzbine": [
+        {
+          "id": "27c1b10d-5ea5-4ef9-bc30-e66f54108ab7",
+          "nazivProizvoda": "Pica",
+          "brojKomada": 3,
+          "cena": 2940,
+          "sastojci": [
+            "Kulen",
+            "Sir",
+            "Šunka"
+          ]
+        },
+        {
+          "id": "265f569a-bd7d-42ed-a4d7-8dd97fe4de53",
+          "nazivProizvoda": "Pica",
+          "brojKomada": 3,
+          "cena": 2340,
+          "sastojci": [
+            "Kulen",
+            "Šampinjoni",
+            "Ljuti sos"
+          ]
+        },
+        {
+          "id": "ce549dc1-6d5d-4e77-bd04-43f66d20d54a",
+          "nazivProizvoda": "Pica",
+          "brojKomada": 3,
+          "cena": 2670,
+          "sastojci": [
+            "Kulen",
+            "Šampinjoni",
+            "Ljuti sos",
+            "Šunka"
+          ]
+        },
+        {
+          "id": "dc4f519c-d036-4ef6-b417-4296b92f9180",
+          "nazivProizvoda": "Pica",
+          "brojKomada": 1,
+          "cena": 860,
+          "sastojci": [
+            "Ljuti sos",
+            "Šunka",
+            "Masline"
+          ]
+        }
       ]
     }
   ],

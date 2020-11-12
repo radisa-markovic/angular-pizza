@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
 
 import { UI } from 'src/app/store/reduceri/ui.reducer';
 import { A_OdjaviKorisnika } from 'src/app/store/akcije/korisnici.akcije';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +13,17 @@ import { A_OdjaviKorisnika } from 'src/app/store/akcije/korisnici.akcije';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  private uiStanje$: Observable<UI>;
   uiStanje: UI;
 
   constructor(private router: Router, 
               private store: Store<GlobalnoStanjeAplikacije>)
-  { }
+  { 
+    this.uiStanje$ = this.store.pipe(select(stanje => stanje.uiStanje));
+  }
   
   ngOnInit() {
-    this.store.select(stanje => stanje.uiStanje)
-              .subscribe(uiStanje => this.uiStanje = uiStanje);
+    this.uiStanje$.subscribe(ui => this.uiStanje = ui);
   }
 
   odjaviKorisnika(event: Event): void 

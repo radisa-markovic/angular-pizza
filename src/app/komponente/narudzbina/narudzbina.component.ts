@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Narudzbina } from '../../models/Narudzbina.model';
 import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { KorisnickoStanje } from 'src/app/store/reduceri/korisnici.reducer';
+import { UI } from 'src/app/store/reduceri/ui.reducer';
 //import { vratiNarudzbinePrijavljenogKorisnika } from 'src/app/store/selektori/narudzbina.selektor';
 
 @Component({
@@ -10,13 +13,16 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./narudzbina.component.css']
 })
 export class NarudzbinaComponent implements OnInit {
-  narudzbine: Narudzbina[]; 
+  private korisnickoStanje$: Observable<KorisnickoStanje>;
+  narudzbine: Narudzbina[] = [];
 
-  constructor(private store: Store<GlobalnoStanjeAplikacije>) { }
+  constructor(private store: Store<GlobalnoStanjeAplikacije>) 
+  {
+    this.korisnickoStanje$ = this.store.pipe(select(stanje => stanje.korisnici));
+  }
 
   ngOnInit() {
-    // this.store.select(vratiNarudzbinePrijavljenogKorisnika())
-    //     .subscribe(narudzbine => this.narudzbine = narudzbine);
+    this.korisnickoStanje$.subscribe(korisnickoStanje => this.narudzbine = korisnickoStanje.narudzbine);
   }
 
 }

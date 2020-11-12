@@ -3,21 +3,36 @@ import { Action, createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter, Update } from '@ngrx/entity';
 import { A_OdjaviKorisnika, A_PrijaviKorisnikaPogresnaLozinka, A_PrijaviKorisnikaPogresnoKorisnickoIme, A_PrijaviKorisnikaUspeh, A_RegistrujKorisnikaNeuspeh, A_RegistrujKorisnikaUspeh } from '../akcije/korisnici.akcije';
 import { A_DodajNovuPicu } from '../akcije/pica.akcije';
+import { Narudzbina } from 'src/app/models/Narudzbina.model';
+import { Pica } from 'src/app/models/Pica.model';
 
 export interface KorisnickoStanje
 {
   ime: string,
   prezime: string,
   korisnickoIme: string,
-  idjeviNarudzbina: string[],
+  narudzbine: Narudzbina[],
 };
 
 const pocetnoStanjeNovo: KorisnickoStanje = {
   ime: "",
   prezime: "",
   korisnickoIme: "",
-  idjeviNarudzbina: [],
+  narudzbine: [],
 };
+
+function upakujNarudzbinu(proizvod: Pica): Narudzbina
+{
+    const narudzbina: Narudzbina = {
+        id: proizvod.id,
+        nazivProizvoda: "Pica",
+        brojKomada: proizvod.brojKomada,
+        cena: proizvod.ukupnaCena,
+        sastojci: proizvod.sastojci
+    };
+
+    return narudzbina;
+}
 
 const korisniciReducer = createReducer<KorisnickoStanje>(pocetnoStanjeNovo,
  on(A_PrijaviKorisnikaUspeh, (stanje, {korisnik}) => ({
@@ -25,7 +40,7 @@ const korisniciReducer = createReducer<KorisnickoStanje>(pocetnoStanjeNovo,
     ime: korisnik.ime,
     prezime: korisnik.prezime,
     korisnickoIme: korisnik.korisnickoIme,
-    idjeviNarudzbina: korisnik.narudzbine
+    narudzbine: korisnik.narudzbine
   })),
   on(A_OdjaviKorisnika, (stanje) => ({
     ...stanje,
@@ -36,7 +51,7 @@ const korisniciReducer = createReducer<KorisnickoStanje>(pocetnoStanjeNovo,
   })),
   on(A_DodajNovuPicu, (stanje, {novaPica}) => ({
     ...stanje,
-    idjeviNarudzbina: [...stanje.idjeviNarudzbina, novaPica.id]
+    narudzbine: [...stanje.narudzbine, upakujNarudzbinu(novaPica)]
   }))
 );
 

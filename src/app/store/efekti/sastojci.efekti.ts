@@ -13,7 +13,7 @@ export class SastojciEfekti {
   vratiSastojkeIzBaze$ = createEffect(() => this.akcija$.pipe(
     ofType(A_UcitajSastojke),
     switchMap(() => this.sastojciService.vratiSastojke().pipe(
-      map(sastojci => A_UcitajSastojkeUspeh({sastojci}) )
+      map(sastojci => A_UcitajSastojkeUspeh({sastojci}))
     )
     )
   )

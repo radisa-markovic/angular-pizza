@@ -32,7 +32,6 @@ export class NapraviNalogComponent implements OnInit {
   ngOnInit(): void 
   {
     this.korisnickoStanje$.subscribe((stanje) => {
-      console.log(stanje);
       this.korisnickoImeJeZauzeto = stanje.korisnickoImeJeZauzeto;
     });
 
@@ -56,6 +55,7 @@ export class NapraviNalogComponent implements OnInit {
   registrujKorisnika(): void 
   {
     let noviKorisnik: Korisnik = this.forma.value;
+    noviKorisnik.id = this.forma.controls["korisnickoIme"].value;
     noviKorisnik.narudzbine = [];//<<--- ovo je bitno jer inace nece ni postojati ovaj property kod novog..
     //.. korisnika, pa se ne mogu ni dodavati narudzbine (to forma nema)
    

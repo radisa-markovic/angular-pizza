@@ -18,8 +18,7 @@ export const A_RegistrujKorisnika = createAction(AkcijeNadKorisnicima.REGISTRUJ_
 
 export const A_RegistrujKorisnikaUspeh = createAction(AkcijeNadKorisnicima.REGISTRUJ_KORISNIKA_USPEH,
                                                       props<{korisnickoIme: string}>());
-
-//videcu sta ovde moze da bude prop...                                                      
+                                                     
 export const A_RegistrujKorisnikaNeuspeh = createAction(AkcijeNadKorisnicima.REGISTRUJ_KORISNIKA_NEUSPEH);
 export const A_PrijaviKorisnika = createAction(AkcijeNadKorisnicima.PRIJAVI_KORISNIKA,
                                                props<{korisnickoIme: string, lozinka: string}>());

@@ -78,13 +78,10 @@ export class PicaComponent implements OnInit {
        this.brojKomada = noviBrojKomada;  
   }
 
-  //mozda postoji i lepsa varijanta ovoga
   preracunajUkupnuCenu(): number 
   {
     return (this.osnovnaCena + this.cenaOdSastojaka) * this.brojKomada;
   }
-
-  
 
   potvrdiPicu(): void 
   {
@@ -97,13 +94,11 @@ export class PicaComponent implements OnInit {
       sastojci: this.sastojciNaPici
     };
     
-    let idKorisnika: string, korisnickoIme: string;
+    let korisnickoIme: string;
     this.store.select(stanje => stanje.korisnici).subscribe(korisnikInfo => {
       korisnickoIme = korisnikInfo.korisnickoIme;
     });
     
-    console.log(novaPica);
-
     this.store.dispatch(A_DodajNovuPicu({novaPica}));
     this.store.dispatch(A_UpisiPicuKodKorisnikaUBazu({korisnickoIme, novaPica}));
     alert(`Narudžbina je uspešno dodata`);

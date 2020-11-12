@@ -9,12 +9,8 @@ import { GlobalnoStanjeAplikacije } from 'src/app/app.state';
   styleUrls: ['./naruci-proizvod.component.css']
 })
 export class NaruciProizvodComponent implements OnInit {
-  protected stavkaZaPonudu: string;
-
-  constructor(private router: Router,
-              private route: ActivatedRoute, 
-              private store: Store<GlobalnoStanjeAplikacije>)
-  { }
+  
+  constructor() { }
 
   ngOnInit() {
     

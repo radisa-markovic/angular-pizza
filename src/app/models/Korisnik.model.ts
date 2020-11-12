@@ -1,8 +1,10 @@
+import { Narudzbina } from './Narudzbina.model';
+
 export interface Korisnik {
   id: string,
   ime: string,
   prezime: string,
   korisnickoIme: string,
   lozinka: string,
-  narudzbine: string[];//valjda je ovo ispravan tip za identifikatore narudzbina
+  narudzbine: Narudzbina[];//ima vise smisla da ovo bude vezano za korisnika
 }
